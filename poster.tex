@@ -1,0 +1,38 @@
+%% margin: The margin between outer edge of the poster and the edge of the paper; i.e. ultimate margin
+%% innermargin: The margin from the edge of the poster edge to the outermost edge of the blocks; i.e. content margin
+%% colspace (horitzontal collumn space?) needs to be high before it's noticable
+\documentclass[24pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=50pt, blockverticalspace=120pt]{tikzposter}
+\usepackage[utf8]{inputenc}
+
+\tikzposterlatexaffectionproofoff
+
+% Make the title layout horizontal instead of vertical, as in Tom's Example?
+% that way you can squeeze more information in, like the title
+\title{Subitzing with Variational Autoencoders}
+\author{Rijnder Wever, Tom Runia}
+\date{\today}
+\institute{University of Amsterdam}
+
+\usetheme{Basic}
+
+\begin{document}
+
+\maketitle
+
+\block{BlocktitleA}{Blocktext}
+
+\begin{columns}
+\column{0.3}
+\block{BlocktitleB}{Hello world I am the poster}
+\column{0.7}
+\block{BlocktitleC}{Blocktext}
+\end{columns}
+
+\begin{columns}
+\column{0.3}
+\block{BlocktitleB}{Hello world I am the poster}
+\column{0.7}
+\block{BlocktitleC}{Blocktext}
+\end{columns}
+
+\end{document}
