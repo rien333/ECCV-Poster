@@ -2,6 +2,28 @@
 %% innermargin: The margin from the edge of the poster edge to the outermost edge of the blocks; i.e. content margin
 %% colspace (horitzontal collumn space?) needs to be high before it's noticable
 \documentclass[24pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=50pt, blockverticalspace=120pt]{tikzposter}
+
+\defineblockstyle{eccv1}{
+     titlewidthscale=0.9, bodywidthscale=1,titleleft,
+     titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0mm, bodyoffsety=15mm,
+     bodyverticalshift=10mm, roundedcorners=0, linewidth=2pt,
+     titleinnersep=6mm, bodyinnersep=1cm
+ }{
+     \draw[color=framecolor, fill=blockbodybgcolor,
+         rounded corners=\blockroundedcorners] (blockbody.south west)
+         rectangle (blockbody.north east);
+     \ifBlockHasTitle
+         \draw[color=framecolor, fill=blocktitlebgcolor,
+             rounded corners=\blockroundedcorners] (blocktitle.south west)
+             rectangle (blocktitle.north east);
+\fi }
+
+
+\definebackgroundstyle{samplebackgroundstyle}{
+     \draw[inner sep=0pt, line width=0pt, color=red, fill=backgroundcolor!30!black]
+         (bottomleft) rectangle (topright);
+}
+
 \usepackage[utf8]{inputenc}
 
 \tikzposterlatexaffectionproofoff
@@ -13,9 +35,12 @@
 \date{\today}
 \institute{University of Amsterdam}
 
-\usetheme{Basic}
+\usetheme{Minimal}
 
 \begin{document}
+
+\useblockstyle{eccv1}
+\usebackgroundstyle{samplebackgroundstyle}
 
 \maketitle
 
@@ -32,7 +57,7 @@
 \column{0.3}
 \block{BlocktitleB}{Hello world I am the poster}
 \column{0.7}
-\block{BlocktitleC}{Blocktext}
+\block{}{\textbf{A block without a title!}}
 \end{columns}
 
 \end{document}
