@@ -1,0 +1,38 @@
+- [x] Latex of PS?
+  - latex lijkt kut, maar je kan op zich wel makkelijk boxes en whatever maken (twee collumen, of allemaal 
+  rijen met _n_-collumen als een soort grid)
+- [ ] Font
+  - examples/scientific-poster-template_blah.png
+- [ ] Make font bigger (can only be done by https://tex.stackexchange.com/questions/243678/how-to-make-tikzposter-work-with-font-sizes-larger-than-25pt i think)
+- [x] 3 columns met in het midden afbeeldingen
+- [ ] Title
+  - Bigger, bolder (HUGE size?)
+  - horitzontal layout
+    - Two collumny, like Firbushposter2.png
+- [ ] Blocktitles
+  - Consider a light blue background
+    - coupled with white text?
+    - Gradients?
+    - removes the need for larrger outlines so you can make them blak and sharp
+    - Make title backgrounds slide in as in scientific-poster-template-portrait-portrait-poster-template-poster-presentation-template-portrait.png
+- [ ] The title looks weird with all other black text
+  - esp with the author thingy
+  - So consider making everything grayish and giving the titles a bg (like above)
+- [ ] Subitizing example
+ - Elephants
+ - The OG 5?
+- [ ] Maybe you can do a hierarchical graph of a brain thingy to point to structural similarities
+- [ ] Reread pointe for the working of subitizing (something with the visiospatial system)
+- [ ] math font is weird
+- [ ] Alternating colors automatically is too much work and sometimes unneeded, specify manually
+- [ ] make bold text also darkblue
+- [ ] consider making the UvA logo blue
+- [ ] Short introduction with whatt we did, without title?
+  - Seperate from the rest with a horitzontal line
+- [ ] Maybe it's just me, but the spacing between lines seems kinda large
+- [ ] Choose a light blue based on hexcolor/xcolor
+- [ ] Andere synthetische afbeeldingen? je had nog zo'n map voor de eindpresentatie
+- [ ] remove the car from the dfc compare thingy
+- [ ] Citations
+  - consider shorter styles (less info)
+  - long thingy at the bottom

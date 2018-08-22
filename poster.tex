@@ -1,63 +1,277 @@
 %% margin: The margin between outer edge of the poster and the edge of the paper; i.e. ultimate margin
 %% innermargin: The margin from the edge of the poster edge to the outermost edge of the blocks; i.e. content margin
 %% colspace (horitzontal collumn space?) needs to be high before it's noticable
-\documentclass[24pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=50pt, blockverticalspace=120pt]{tikzposter}
+% innermargin was 40pt, idk what's printable🎍
+\documentclass[25pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=50pt, blockverticalspace=50pt]{tikzposter}
 
-\defineblockstyle{eccv1}{
-     titlewidthscale=0.9, bodywidthscale=1,titleleft,
-     titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0mm, bodyoffsety=15mm,
-     bodyverticalshift=10mm, roundedcorners=0, linewidth=2pt,
-     titleinnersep=6mm, bodyinnersep=1cm
- }{
-     \draw[color=framecolor, fill=blockbodybgcolor,
-         rounded corners=\blockroundedcorners] (blockbody.south west)
-         rectangle (blockbody.north east);
-     \ifBlockHasTitle
-         \draw[color=framecolor, fill=blocktitlebgcolor,
-             rounded corners=\blockroundedcorners] (blocktitle.south west)
-             rectangle (blocktitle.north east);
-\fi }
+% dummy text generation
+\usepackage{blindtext}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{fix-cm}
+\usepackage{stackengine}
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage[utf8]{inputenc}
+
+% Math
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% Bibliography
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{abbrvnat}
+% this only redefines the citations in text
+%% \renewcommand{\citenumfont}[1]{\textbf{#1}}
+\renewcommand{\bibnumfmt}[1]{\textbf{[#1]} \,}
 
 
-\definebackgroundstyle{samplebackgroundstyle}{
-     \draw[inner sep=0pt, line width=0pt, color=red, fill=backgroundcolor!30!black]
-         (bottomleft) rectangle (topright);
+
+\usepackage[]{fontspec}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont{Open Sans}
+%% \setmonofont{Inconsolata-dz}
+
+% remove "References" heading in natbib
+\renewcommand{\bibsection}{}
+
+% based on "Minimal" blockstyle
+\defineblockstyle{eccv2}{
+    titlewidthscale=1, bodywidthscale=1, titlecenter,
+    titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
+    bodyverticalshift=0pt, roundedcorners=0, linewidth=0.13cm, % same as innersep
+    titleinnersep=1cm, bodyinnersep=0.08cm
+}{
+    \begin{scope}[line width=\blocklinewidth, rounded corners=\blockroundedcorners]
+       \ifBlockHasTitle %
+           \draw[color=lightgrey, fill=white]
+               (blockbody.south west) rectangle (blocktitle.north east);
+           % replace color=... by draw=none above and uncomment for dashed line seperation
+           % title rectangle
+           %% \draw[fill=white]
+           %%     (blocktitle.south west) rectangle (blocktitle.north east);
+       \else
+       		 % when no title
+             \draw[draw=none]%, fill=blockbodybgcolor]
+                 (blockbody.south west) rectangle (blockbody.north east);
+        \fi
+    \end{scope}
 }
 
-\usepackage[utf8]{inputenc}
+\defineinnerblockstyle{eccvinner}{
+    titlewidthscale=1, bodywidthscale=1, titleleft,
+    titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
+    bodyverticalshift=0pt, roundedcorners=0, linewidth=0mm,
+    titleinnersep=25pt, bodyinnersep=25pt
+}{
+    \begin{scope}[line width=\innerblocklinewidth, rounded corners=\innerblockroundedcorners]
+       \ifInnerblockHasTitle %
+           \draw[draw=none, fill=innerblockbodybgcolor]
+               (innerblockbody.south west) rectangle (innerblocktitle.north east);
+       \else
+             \draw[draw=none, fill=innerblockbodybgcolor]
+                 (innerblockbody.south west) rectangle (innerblockbody.north east);
+        \fi
+    \end{scope}
+}
+
+
+% Redefine block title stuff
+\usepackage{xpatch}
+%% \xpatchcmd{\block}{\it\LARGE\color{blocktitlefgcolor}}{\sffamily\itshape\LARGE\color{blocktitlefgcolor}}{}{}
+\xpatchcmd{\block}{\bf\LARGE\color{blocktitlefgcolor}}{\bfseries\Huge\color{eccvblue}}{}{}
+\xpatchcmd{\innerblock}{\bf \color{innerblocktitlefgcolor}}{\bfseries\color{eccvblue}}{}{}
+%% redo font stuff here I guess
+%% Inner body text style
+\xpatchcmd{\block}{#3}{\LARGE#3}{}{}
+
+\definecolor{eccvlightblue}{HTML}{009EE0}
+% more gray blue ish but makes a good background color
+% combine with background titles in like light blue?
+\definecolor{eccvsuperlightblue}{HTML}{E2F1F9}
+%% \definecolor{eccvsuperlightblue}{HTML}{D7FFFF}
+\definecolor{eccvblue}{HTML}{045494}
+\definecolor{lightgrey}{HTML}{CCCCCC}
+%% \definecolor{lightgrey}{HTML}{009EE0}
+
+%% define a gray for all the blocks (iterm gray?) and github blue
+%% Primary colors are iTerm gray (to be combined with blue backgrounds?)
+%% black and eccv blue
+\definecolorstyle{eccvblue} {
+\definecolor{colorOne}{named}{white}
+\definecolor{colorTwo}{named}{eccvlightblue}
+\definecolor{colorThree}{named}{eccvblue}
+}{
+% Background Colors
+\colorlet{backgroundcolor}{white}
+\colorlet{framecolor}{black}
+% Title Colors
+\colorlet{titlefgcolor}{colorThree}
+\colorlet{titlebgcolor}{colorOne}
+% Block Colors
+\colorlet{blocktitlebgcolor}{colorThree}
+\colorlet{blocktitlefgcolor}{white}
+\colorlet{blockbodybgcolor}{white}
+\colorlet{blockbodyfgcolor}{black}
+% Innerblock Colors
+\colorlet{innerblocktitlebgcolor}{white}
+\colorlet{innerblocktitlefgcolor}{black}
+\colorlet{innerblockbodybgcolor}{colorThree!30!white}
+\colorlet{innerblockbodyfgcolor}{black}
+% Note colors
+\colorlet{notefgcolor}{black}
+\colorlet{notebgcolor}{colorTwo!50!white}
+\colorlet{noteframecolor}{colorTwo}
+}
+
+
+
+\definetitlestyle{simpletitle}{
+width=800mm, roundedcorners=0, linewidth=0pt, innersep=0pt,
+titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
+\begin{scope}[line width=\titlelinewidth, rounded corners=\titleroundedcorners]
+\draw[color=white, fill=titlebgcolor] % notice the white hack
+(\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);
+\end{scope}
+}
+
+\newcommand\boldblue[1]{\textcolor{eccvblue}{\textbf{#1}}}
 
 \tikzposterlatexaffectionproofoff
 
 % Make the title layout horizontal instead of vertical, as in Tom's Example?
-% that way you can squeeze more information in, like the title
-\title{Subitzing with Variational Autoencoders}
+% that way you can squeeze more information in
+\title{\Longstack[l]{{SUBITIZING WITH} {VARIATIONAL AUTOENCODERS}}}
 \author{Rijnder Wever, Tom Runia}
 \date{\today}
 \institute{University of Amsterdam}
+\titlegraphic{\includegraphics[width=6.0cm]{UVA-plain}}
 
-\usetheme{Minimal}
+
+% 🐝🐝🐝🐝🐝 Do something with alternating lightblue and white backgrounds
+% But with black text
+% Maybe put other info, such as titling info on a blue background as well
+% maybe you can do this with subblocks?
+
+% also figure out why the titleless block behaves weird (maybe redefine such (image?) blocks locaally however)
+
+\usecolorstyle[colorOne=white,colorTwo=black,colorThree=eccvblue]{eccvblue}
+\usetitlestyle{simpletitle}
+
+\settitle{
+    \begin{multicols}{2}
+    \setstackgap{L}{1em}
+    \vspace*{-1\topskip plus 1fill}
+    \vbox{
+      \color{titlefgcolor} {\bfseries \Huge \fontsize{120}{144}\selectfont \@title \par}
+      \vspace*{1.0em}
+      % The two different colors in the title are really not that nice
+      \color{titlefgcolor} {\Huge \@author}}
+    \vspace*{\fill}
+    \columnbreak
+    
+    \setstackgap{L}{2.5em}
+    \begin{flushright}
+      \Longstack{
+        {\@titlegraphic} 
+        {\Huge \color{black}\@institute}}
+    \end{flushright}
+    \end{multicols}
+}
 
 \begin{document}
 
-\useblockstyle{eccv1}
-\usebackgroundstyle{samplebackgroundstyle}
+%% \useblockstyle{eccv1}
+%% \useblockstyle{Minimal}
+\useblockstyle{eccv2}
+\useinnerblockstyle{eccvinner}
 
 \maketitle
 
-\block{BlocktitleA}{Blocktext}
+\block{}{
+\colorlet{innerblockbodybgcolor}{white}
+% No need for margins if there is no box
+% looks a tiny bit weirder without margins?
+% make sure the line thickness matches the box thickness
+%% \innerblock{}{
+{\huge
+  Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation. \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.13cm}}}}
+%% }
+}
+%% \huge\blindtext[1] \noindent\makebox[\linewidth]{\rule{0.75\paperwidth}{0.4pt}}}
+
 
 \begin{columns}
-\column{0.3}
-\block{BlocktitleB}{Hello world I am the poster}
-\column{0.7}
-\block{BlocktitleC}{Blocktext}
+\column{0.5}
+\block{VARIATIONAL AUTOENCODER}{
+\colorlet{innerblockbodybgcolor}{white}
+\innerblock{}{\boldblue{VAEs} learn to map data samples $X$ to a posterior distribution \mbox{$Q(z \mid X)$} rather than a deterministic latent representation as used in conventional autoencoders. Inputs can be reconstructed by sampling latent vector $z$ from the posterior distribution and passing it through a decoder network. To make sampling feasible, the posterior distribution is parametrized by a Gaussian distribution with its mean and variance predicted by the encoder.}
+\colorlet{innerblockbodybgcolor}{eccvsuperlightblue}
+
+\innerblock{}{Together, the VAE's objective function is the summation of a reconstruction term (negative log-likelihood of the data) and the KL regularization:
+%
+\begin{align}
+  %\log P(X) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z \mid X)] = E[\log P(X \mid z) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]]
+  \mathcal{L}_{VAE} = E[\log P(X \mid z)] - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]
+\end{align}}
+
+\colorlet{innerblockbodybgcolor}{white}
+\innerblock{wow}{\blindlist{itemize}[3]}
+}
+\column{0.5}
+% "immediate" seems appropiate bc it conveys both directness and the 
+% fact that subitizing shows (very little) temporal delay
+\block{SUBITIZING}{
+\colorlet{innerblockbodybgcolor}{eccvsuperlightblue}
+\innerblock{}{\boldblue{Subitizing} is a perceptual skill shared by many animals that allows them to immediately percieve the numerosity of small sets. The amount of elephants in each of the images below should be visible without counting, except for when the amount of elephants lies outside of the visual \boldblue{subitizing range} of $1$-$4$.}
+%% \begin{figure}%
+%% \subfloat{\includegraphics[width=5.15cm,valign=c]{vstack_e}}
+%% \quad
+%% \subfloat{\includegraphics[width=6cm,valign=c]{e4}}
+%% \end{figure}
+\colorlet{innerblockbodybgcolor}{white}
+\begin{tikzfigure}
+%% \includegraphics{vstack_e} 
+\includegraphics[width=15cm]{e4} 
+\end{tikzfigure}
+\colorlet{innerblockbodybgcolor}{eccvsuperlightblue}
+\innerblock{}{\blindlist{itemize}[3]Dataset catered to subitizing \citet{zhang2016salient}}
+}
+
 \end{columns}
 
+\block[]{OPTIMIZATIONS}{
+\colorlet{innerblockbodybgcolor}{white}
+\innerblock{}{\begin{minipage}[t]{0.4\linewidth}
+\boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss of  which uses intermediate layer representations in the objective function of the autoencoder.
+\end{minipage}
+\begin{adjustbox}{valign=t}
+\begin{minipage}[t]{0.6\linewidth}
+\begin{tikzfigure}\includegraphics[width=40cm]{bce_dfc_crop}\end{tikzfigure}
+\end{minipage}
+\end{adjustbox}}
+
+\colorlet{innerblockbodybgcolor}{eccvsuperlightblue}
+\innerblock{}{\begin{minipage}[t]{0.4\linewidth} 
+\boldblue{Synthetic Data} was used to augment the SOS dataset. The images are synthesized by cut-pasting objects from the THUS10000 dataset  onto backgrounds from the SUN dataset. Subsequently, we apply random image transforms to each object to increase diversity in appearance. 
+\end{minipage}
+\begin{adjustbox}{valign=t}
+\begin{minipage}[t]{0.6\linewidth}
+\begin{tikzfigure}\includegraphics[width=15cm]{syn2}\end{tikzfigure}
+\end{minipage}
+\end{adjustbox}
+}
+}
+
 \begin{columns}
-\column{0.3}
-\block{BlocktitleB}{Hello world I am the poster}
-\column{0.7}
-\block{}{\textbf{A block without a title!}}
+\column{0.6}
+\block{Blocktile}{text}
+\column{0.4}
+\block{}{\bibliography{poster}}
 \end{columns}
+
+%% \begin{center}
+%% \end{center}
 
 \end{document}
