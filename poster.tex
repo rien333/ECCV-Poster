@@ -15,6 +15,9 @@
 \usepackage[export]{adjustbox}
 \usepackage[utf8]{inputenc}
 
+% Table packages
+\usepackage{booktabs}
+
 % Math
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -25,8 +28,6 @@
 % this only redefines the citations in text
 %% \renewcommand{\citenumfont}[1]{\textbf{#1}}
 \renewcommand{\bibnumfmt}[1]{\textbf{[#1]} \,}
-
-
 
 \usepackage[]{fontspec}
 \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
@@ -40,34 +41,58 @@
 \defineblockstyle{eccv2}{
     titlewidthscale=1, bodywidthscale=1, titlecenter,
     titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
-    bodyverticalshift=0pt, roundedcorners=0, linewidth=0.13cm, % same as innersep
-    titleinnersep=1cm, bodyinnersep=0.08cm
+    bodyverticalshift=0pt, roundedcorners=6, linewidth=0.42cm, % same as innersep
+    titleinnersep=1cm, bodyinnersep=0.00cm
 }{
     \begin{scope}[line width=\blocklinewidth, rounded corners=\blockroundedcorners]
+      %% uncomment the ifs for different titleless look
        \ifBlockHasTitle %
-           \draw[color=lightgrey, fill=white]
-               (blockbody.south west) rectangle (blocktitle.north east);
-           % replace color=... by draw=none above and uncomment for dashed line seperation
            % title rectangle
-           %% \draw[fill=white]
-           %%     (blocktitle.south west) rectangle (blocktitle.north east);
+           \draw[draw=none, fill=eccvgrayblue]
+               (blocktitle.south west) rectangle (blocktitle.north east);
+           % box outline
+           \draw[color=eccvgrayblue, fill=none]
+               (blockbody.south west) rectangle (blocktitle.north east);
        \else
-       		 % when no title
              \draw[draw=none]%, fill=blockbodybgcolor]
                  (blockbody.south west) rectangle (blockbody.north east);
         \fi
     \end{scope}
 }
 
-\defineinnerblockstyle{eccvinner}{
-    titlewidthscale=1, bodywidthscale=1, titleleft,
+\defineblockstyle{reference}{
+    titlewidthscale=1, bodywidthscale=1, titlecenter,
     titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
-    bodyverticalshift=0pt, roundedcorners=0, linewidth=0mm,
-    titleinnersep=25pt, bodyinnersep=25pt
+    bodyverticalshift=0pt, roundedcorners=0, linewidth=0.0cm, % same as innersep
+    titleinnersep=0cm, bodyinnersep=0pt % matches innerbody style
+}{}
+
+\defineinnerblockstyle{eccvinner}{
+    titlewidthscale=1, bodywidthscale=1, titlecenter,
+    titleoffsetx=0pt, titleoffsety=-00pt, bodyoffsetx=0pt, bodyoffsety=90pt,
+    bodyverticalshift=0pt, roundedcorners=0, linewidth=0.0cm,
+    titleinnersep=0pt, bodyinnersep=25pt
 }{
     \begin{scope}[line width=\innerblocklinewidth, rounded corners=\innerblockroundedcorners]
        \ifInnerblockHasTitle %
            \draw[draw=none, fill=innerblockbodybgcolor]
+               (innerblockbody.south west) rectangle (innerblocktitle.north east);
+       \else
+             \draw[draw=none, fill=innerblockbodybgcolor]
+                 (innerblockbody.south west) rectangle (innerblockbody.north east);
+        \fi
+    \end{scope}
+}
+
+\defineinnerblockstyle{eccvinnerhorizontal}{
+    titlewidthscale=1, bodywidthscale=1.0, titlecenter,
+    titleoffsetx=0pt, titleoffsety=-0pt, bodyoffsetx=0pt, bodyoffsety=-130pt,
+    bodyverticalshift=0pt, roundedcorners=0, linewidth=0.0cm,
+    titleinnersep=-50pt, bodyinnersep=25pt
+}{
+    \begin{scope}[line width=\innerblocklinewidth, rounded corners=\innerblockroundedcorners]
+       \ifInnerblockHasTitle %
+           \draw[color=innerblockbodybgcolor, fill=innerblockbodybgcolor]
                (innerblockbody.south west) rectangle (innerblocktitle.north east);
        \else
              \draw[draw=none, fill=innerblockbodybgcolor]
@@ -89,11 +114,11 @@
 \definecolor{eccvlightblue}{HTML}{009EE0}
 % more gray blue ish but makes a good background color
 % combine with background titles in like light blue?
-\definecolor{eccvsuperlightblue}{HTML}{E2F1F9}
-%% \definecolor{eccvsuperlightblue}{HTML}{D7FFFF}
+\definecolor{eccvgrayblue}{HTML}{E2F1F9}
+\definecolor{eccvsuperlightblue}{HTML}{F5F9FF}
+%% \definecolor{eccvgrayblue}{HTML}{D7FFFF}
 \definecolor{eccvblue}{HTML}{045494}
 \definecolor{lightgrey}{HTML}{CCCCCC}
-%% \definecolor{lightgrey}{HTML}{009EE0}
 
 %% define a gray for all the blocks (iterm gray?) and github blue
 %% Primary colors are iTerm gray (to be combined with blue backgrounds?)
@@ -182,9 +207,9 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 
 \begin{document}
 
-%% \useblockstyle{eccv1}
-%% \useblockstyle{Minimal}
+%% \useblockstyle{Basic}
 \useblockstyle{eccv2}
+%% \useinnerblockstyle{Basic}
 \useinnerblockstyle{eccvinner}
 
 \maketitle
@@ -195,19 +220,18 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 % looks a tiny bit weirder without margins?
 % make sure the line thickness matches the box thickness
 %% \innerblock{}{
+% The rule could possibly be done in tikz
 {\huge
-  Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation. \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.13cm}}}}
+  Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation. \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}}
 %% }
 }
-%% \huge\blindtext[1] \noindent\makebox[\linewidth]{\rule{0.75\paperwidth}{0.4pt}}}
-
 
 \begin{columns}
 \column{0.5}
 \block{VARIATIONAL AUTOENCODER}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{\boldblue{VAEs} learn to map data samples $X$ to a posterior distribution \mbox{$Q(z \mid X)$} rather than a deterministic latent representation as used in conventional autoencoders. Inputs can be reconstructed by sampling latent vector $z$ from the posterior distribution and passing it through a decoder network. To make sampling feasible, the posterior distribution is parametrized by a Gaussian distribution with its mean and variance predicted by the encoder.}
-\colorlet{innerblockbodybgcolor}{eccvsuperlightblue}
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
 
 \innerblock{}{Together, the VAE's objective function is the summation of a reconstruction term (negative log-likelihood of the data) and the KL regularization:
 %
@@ -217,60 +241,94 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 \end{align}}
 
 \colorlet{innerblockbodybgcolor}{white}
-\innerblock{wow}{\blindlist{itemize}[3]}
+\innerblock{}{\blindlist{itemize}[1]}
 }
 \column{0.5}
 % "immediate" seems appropiate bc it conveys both directness and the 
 % fact that subitizing shows (very little) temporal delay
 \block{SUBITIZING}{
-\colorlet{innerblockbodybgcolor}{eccvsuperlightblue}
+\colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{\boldblue{Subitizing} is a perceptual skill shared by many animals that allows them to immediately percieve the numerosity of small sets. The amount of elephants in each of the images below should be visible without counting, except for when the amount of elephants lies outside of the visual \boldblue{subitizing range} of $1$-$4$.}
 %% \begin{figure}%
 %% \subfloat{\includegraphics[width=5.15cm,valign=c]{vstack_e}}
 %% \quad
 %% \subfloat{\includegraphics[width=6cm,valign=c]{e4}}
 %% \end{figure}
-\colorlet{innerblockbodybgcolor}{white}
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+\innerblock{}{
 \begin{tikzfigure}
 %% \includegraphics{vstack_e} 
 \includegraphics[width=15cm]{e4} 
 \end{tikzfigure}
-\colorlet{innerblockbodybgcolor}{eccvsuperlightblue}
-\innerblock{}{\blindlist{itemize}[3]Dataset catered to subitizing \citet{zhang2016salient}}
 }
-
-\end{columns}
-
-\block[]{OPTIMIZATIONS}{
 \colorlet{innerblockbodybgcolor}{white}
-\innerblock{}{\begin{minipage}[t]{0.4\linewidth}
-\boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss of  which uses intermediate layer representations in the objective function of the autoencoder.
-\end{minipage}
-\begin{adjustbox}{valign=t}
-\begin{minipage}[t]{0.6\linewidth}
-\begin{tikzfigure}\includegraphics[width=40cm]{bce_dfc_crop}\end{tikzfigure}
-\end{minipage}
-\end{adjustbox}}
-
-\colorlet{innerblockbodybgcolor}{eccvsuperlightblue}
-\innerblock{}{\begin{minipage}[t]{0.4\linewidth} 
-\boldblue{Synthetic Data} was used to augment the SOS dataset. The images are synthesized by cut-pasting objects from the THUS10000 dataset  onto backgrounds from the SUN dataset. Subsequently, we apply random image transforms to each object to increase diversity in appearance. 
-\end{minipage}
-\begin{adjustbox}{valign=t}
-\begin{minipage}[t]{0.6\linewidth}
-\begin{tikzfigure}\includegraphics[width=15cm]{syn2}\end{tikzfigure}
-\end{minipage}
-\end{adjustbox}
-}
+\innerblock{}{The \boldblue{Salient Object Subtizing Dataset} \citep{zhang2016salient} catered to learning subitizing}
 }
 
-\begin{columns}
-\column{0.6}
-\block{Blocktile}{text}
-\column{0.4}
-\block{}{\bibliography{poster}}
 \end{columns}
 
+%% \begin{columns}
+%% \column{0.5}
+%% \useinnerblockstyle{Minimal}
+\block{OPTIMIZATIONS}{
+\colorlet{innerblockbodybgcolor}{white}
+%% \begin{minipage}[t]{0.4\linewidth}
+\begin{multicols*}{2}
+\innerblock{}{
+\boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss which uses intermediate layer representations in the objective function of the autoencoder.
+\begin{tikzfigure}\includegraphics[width=31cm]{bce_dfc_crop}\end{tikzfigure}
+}
+%% \end{minipage}
+%% \begin{adjustbox}{valign=t}
+%% \begin{minipage}[t]{0.51\linewidth}
+\useinnerblockstyle{eccvinnerhorizontal}
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+\innerblock{}{
+A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds. Subsequently, we apply random image transforms to each object to increase diversity in appearance. 
+\begin{tikzfigure}\includegraphics[width=15cm]{syn2}\end{tikzfigure}
+}
+\end{multicols*}
+%% \end{minipage}
+%% \end{adjustbox}
+}
+
+%% \useinnerblockstyle{eccvinner}
+%% \column{0.5}
+\block{RESULTS}{
+\useinnerblockstyle{eccvinner}
+\colorlet{innerblockbodybgcolor}{white}
+\innerblock{}{
+\begin{tikzfigure}
+    %% \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lllllll}
+    \begin{tabular}{lllllll}
+    \toprule
+    Count Label $\rightarrow$ & \quad 0 & \quad 1 & \quad 2 & \quad 3 & \quad 4+ & \quad mean \\
+    \midrule
+    Chance & \quad 27.5 & \quad46.5 & \quad18.6 & \quad11.7 & \quad\phantom{0}9.7 & \quad22.8 \\
+    GIST & \quad 67.4 & \quad65.0 & \quad32.3 & \quad17.5 & \quad24.7 & \quad41.4 \\
+    SIFT+IFV & \quad 83.0 & \quad68.1 & \quad35.1 & \quad26.6 & \quad38.1 & \quad50.1 \\
+    CNN\_FT & \quad 93.6 & \quad93.8 & \quad75.2 & \quad58.6 & \quad71.6 & \quad78.6 \\
+    VAE + softmax (ours) & \quad76.0 & \quad49.0 & \quad40.0 & \quad27.0 & \quad30.0 & \quad44.4 \\
+    \bottomrule
+    \end{tabular}
+\end{tikzfigure}
+}
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+\innerblock{}{\boldblue{VAE + softmax.} \blindlist{enumerate}[2]}
+}
+
+%% \end{columns}
+
+%% \begin{columns}
+%% \column{0.6}
+%% \block{Blocktile}{text}
+%% \column{0.4}
+%% \block{Blocktile}{text}
+%% \end{columns}
+
+\useblockstyle{reference}
+\block{}{\noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
+\bibliography{poster}}
 %% \begin{center}
 %% \end{center}
 
