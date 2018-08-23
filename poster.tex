@@ -67,9 +67,11 @@
     titleinnersep=0cm, bodyinnersep=0pt % matches innerbody style
 }{}
 
+% the titleoffsety is important, see
+% https://tex.stackexchange.com/questions/447378/tikzposter-leaves-a-gap-in-empty-innerblock-title
 \defineinnerblockstyle{eccvinner}{
     titlewidthscale=1, bodywidthscale=1, titlecenter,
-    titleoffsetx=0pt, titleoffsety=-00pt, bodyoffsetx=0pt, bodyoffsety=90pt,
+    titleoffsetx=0pt, titleoffsety=-15pt, bodyoffsetx=0pt, bodyoffsety=90pt,
     bodyverticalshift=0pt, roundedcorners=0, linewidth=0.0cm,
     titleinnersep=0pt, bodyinnersep=25pt
 }{
@@ -281,7 +283,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 %% \end{minipage}
 %% \begin{adjustbox}{valign=t}
 %% \begin{minipage}[t]{0.51\linewidth}
-\useinnerblockstyle{eccvinnerhorizontal}
+%% \useinnerblockstyle{eccvinnerhorizontal}
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
 A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds. Subsequently, we apply random image transforms to each object to increase diversity in appearance. 
@@ -292,7 +294,6 @@ A mixture of natural images and \boldblue{synthetic data} was used to augment th
 %% \end{adjustbox}
 }
 
-%% \useinnerblockstyle{eccvinner}
 %% \column{0.5}
 \block{RESULTS}{
 \useinnerblockstyle{eccvinner}
