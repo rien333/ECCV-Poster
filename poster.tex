@@ -10,7 +10,6 @@
 \usepackage{multicol}
 \usepackage{fix-cm}
 \usepackage{stackengine}
-\usepackage{subfig}
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
 \usepackage[utf8]{inputenc}
@@ -65,6 +64,29 @@
     \end{scope}
 }
 
+% Consider making the line either blue or gray
+\defineblockstyle{eccv2optimizations}{
+    titlewidthscale=1, bodywidthscale=1, titlecenter,
+    titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
+    bodyverticalshift=-6pt, roundedcorners=6, linewidth=0.42cm, % same as innersep
+    titleinnersep=1cm, bodyinnersep=0.21cm
+}{
+    \begin{scope}[line width=\blocklinewidth, rounded corners=\blockroundedcorners]
+      % box outline
+      \draw[draw=eccvgrayblue, fill=none]
+      	(blockbody.south west) rectangle (blocktitle.north east);
+      % title rectangle
+      \fill[eccvgrayblue]
+      	(blocktitle.south west) rectangle (blocktitle.north east);
+      % seperator line
+      %% \path (blockbody.south west) 
+      % sorta add these corrdinates/values to the start
+      %% +(0.5\linewidth,0cm) coordinate (c1);
+      %% \draw [line width=0.42cm,eccvgrayblue, dashed, dash pattern=on 20pt off 20pt] (blockbody.south) -- (blockbody.north);
+      %% \draw [line width=0.2cm,lightgrey] (blockbody.south) -- (blockbody.north);
+    \end{scope}
+}
+
 \defineblockstyle{reference}{
     titlewidthscale=1, bodywidthscale=1, titlecenter,
     titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
@@ -90,6 +112,13 @@
         \fi
     \end{scope}
 }
+
+\defineinnerblockstyle{eccvinneroptimizations}{
+    titlewidthscale=1, bodywidthscale=1, titlecenter,
+    titleoffsetx=0pt, titleoffsety=-0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
+    bodyverticalshift=0pt, roundedcorners=0, linewidth=0.0cm,
+    titleinnersep=0pt, bodyinnersep=25pt
+}{}
 
 % Redefine block title stuff
 \usepackage{xpatch}
@@ -156,6 +185,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 
 \newcommand\boldblue[1]{\textcolor{eccvblue}{\textbf{#1}}}
 
+
 \tikzposterlatexaffectionproofoff
 
 % Make the title layout horizontal instead of vertical, as in Tom's Example?
@@ -196,6 +226,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
     \end{flushright}
     \end{multicols}
 }
+
 
 \begin{document}
 
@@ -267,36 +298,48 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 
 %% \begin{columns}
 %% \column{0.5}
-%% \useblockstyle{eccv2horizontal}
+\useblockstyle{eccv2optimizations}
 \block{OPTIMIZATIONS}{
 %% \begin{minipage}[t]{0.4\linewidth}
+
+\useinnerblockstyle{eccvinner}
 \colorlet{innerblockbodybgcolor}{white}
+\renewcommand{\columnseprulecolor}{\color[HTML]{E2F1F9}}
+\setlength\columnseprule{0.10cm}
 \setlength\columnsep{0pt}
 \setlength\multicolsep{-1.1pt} % this number is dependend on the fontsize
 %% \setcounter{columnbadness}{7000}
 %% \setcounter{finalcolumnbadness}{7000}
+\innerblock[bodyinnersep=25pt]{}{
 \begin{multicols}{2}
-\innerblock{}{
-\begin{tikzfigure}\includegraphics[width=31.0cm]{bce_dfc_crop}\end{tikzfigure}
-\boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss which uses intermediate layer representations in the objective function of the autoencoder.
-%% \vskip -0.65em
-}
-%% \end{minipage}
-%% \begin{adjustbox}{valign=t}
-%% \begin{minipage}[t]{0.51\linewidth}
-%% \useinnerblockstyle{eccvinnerhorizontal}
-\colorlet{innerblockbodybgcolor}{eccvgrayblue}
-\innerblock{}{
-\begin{tikzfigure}\includegraphics[width=15cm]{syn2}\end{tikzfigure}
-A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds. Subsequently, we apply random image transforms to each object to increase diversity in appearance. 
-%% \vskip -0.5em
-\vskip 0.11em
-}
+  {\begin{tikzfigure} \includegraphics[width=0.8\linewidth]{bce_dfc_crop}\end{tikzfigure}}
+  { \begin{tikzfigure}
+      \centering
+        \includegraphics[width=0.195\linewidth]{syn1}
+        \includegraphics[width=0.195\linewidth]{syn2}
+        \includegraphics[width=0.195\linewidth]{syn3}
+        \includegraphics[width=0.195\linewidth]{syn4}
+  \end{tikzfigure}
+  }
 \end{multicols}
-%% \end{minipage}
-%% \end{adjustbox}
+}
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+
+\useinnerblockstyle{eccvinner}
+\innerblock{}{
+\renewcommand{\columnseprulecolor}{\color[HTML]{FFFFFF}}
+\setlength\columnsep{90pt}
+\setlength\columnseprule{0.05cm}
+%% \setlength\columnseprule{0.0cm}
+\begin{multicols}{2}
+{\boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss which uses intermediate layer representations in the objective function of the autoencoder.\par}
+{A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds. Subsequently, we apply random image transforms to each object to increase diversity in appearance. }
+\vskip 0.11em
+\end{multicols}
+}
 }
 
+\useblockstyle{eccv2}
 \begin{columns}
 \column{0.435}
 \block{SUBITIZING TASK PERFORMANCE}{
