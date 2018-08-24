@@ -2,7 +2,7 @@
 %% innermargin: The margin from the edge of the poster edge to the outermost edge of the blocks; i.e. content margin
 %% colspace (horitzontal collumn space?) needs to be high before it's noticable
 % innermargin was 40pt, idk what's printable🎍
-\documentclass[25pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=50pt, blockverticalspace=50pt]{tikzposter}
+\documentclass[25pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=45pt, blockverticalspace=45pt]{tikzposter}
 
 % dummy text generation
 \usepackage{blindtext}
@@ -14,6 +14,7 @@
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
 \usepackage[utf8]{inputenc}
+\usepackage{float}
 
 % Table packages
 \usepackage{booktabs}
@@ -21,6 +22,8 @@
 % Math
 \usepackage{amssymb}
 \usepackage{amsmath}
+%% sans serif math font
+\usepackage{sfmath}
 
 % Bibliography
 \usepackage[square,numbers]{natbib}
@@ -33,29 +36,31 @@
 \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
 \setmainfont{Open Sans}
 %% \setmonofont{Inconsolata-dz}
+%% \usepackage[T1]{fontenc}
+%% this scaling feature is pretty handy
+%% \usepackage[default,scale=0.79]{opensans}
 
 % remove "References" heading in natbib
 \renewcommand{\bibsection}{}
 
 % based on "Minimal" blockstyle
+% body ofsett 1 is nice bc of the titleless innerblock "glitch"
+% (see stackexchange link below)
 \defineblockstyle{eccv2}{
     titlewidthscale=1, bodywidthscale=1, titlecenter,
     titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
-    bodyverticalshift=0pt, roundedcorners=6, linewidth=0.42cm, % same as innersep
-    titleinnersep=1cm, bodyinnersep=0.00cm
+    bodyverticalshift=-6pt, roundedcorners=6, linewidth=0.42cm, % same as innersep
+    titleinnersep=1cm, bodyinnersep=0.21cm
 }{
     \begin{scope}[line width=\blocklinewidth, rounded corners=\blockroundedcorners]
       %% uncomment the ifs for different titleless look
        \ifBlockHasTitle %
-           % title rectangle
-           \draw[draw=none, fill=eccvgrayblue]
-               (blocktitle.south west) rectangle (blocktitle.north east);
            % box outline
-           \draw[color=eccvgrayblue, fill=none]
+           \draw[draw=eccvgrayblue, fill=white]
                (blockbody.south west) rectangle (blocktitle.north east);
-       \else
-             \draw[draw=none]%, fill=blockbodybgcolor]
-                 (blockbody.south west) rectangle (blockbody.north east);
+           % title rectangle
+           \fill[eccvgrayblue]
+               (blocktitle.south west) rectangle (blocktitle.north east);
         \fi
     \end{scope}
 }
@@ -71,47 +76,33 @@
 % https://tex.stackexchange.com/questions/447378/tikzposter-leaves-a-gap-in-empty-innerblock-title
 \defineinnerblockstyle{eccvinner}{
     titlewidthscale=1, bodywidthscale=1, titlecenter,
-    titleoffsetx=0pt, titleoffsety=-15pt, bodyoffsetx=0pt, bodyoffsety=90pt,
+    titleoffsetx=0pt, titleoffsety=-0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
     bodyverticalshift=0pt, roundedcorners=0, linewidth=0.0cm,
     titleinnersep=0pt, bodyinnersep=25pt
 }{
     \begin{scope}[line width=\innerblocklinewidth, rounded corners=\innerblockroundedcorners]
        \ifInnerblockHasTitle %
-           \draw[draw=none, fill=innerblockbodybgcolor]
+           \filldraw[innerblockbodybgcolor]
                (innerblockbody.south west) rectangle (innerblocktitle.north east);
        \else
-             \draw[draw=none, fill=innerblockbodybgcolor]
+             \filldraw[innerblockbodybgcolor]
                  (innerblockbody.south west) rectangle (innerblockbody.north east);
         \fi
     \end{scope}
 }
-
-\defineinnerblockstyle{eccvinnerhorizontal}{
-    titlewidthscale=1, bodywidthscale=1.0, titlecenter,
-    titleoffsetx=0pt, titleoffsety=-0pt, bodyoffsetx=0pt, bodyoffsety=-130pt,
-    bodyverticalshift=0pt, roundedcorners=0, linewidth=0.0cm,
-    titleinnersep=-50pt, bodyinnersep=25pt
-}{
-    \begin{scope}[line width=\innerblocklinewidth, rounded corners=\innerblockroundedcorners]
-       \ifInnerblockHasTitle %
-           \draw[color=innerblockbodybgcolor, fill=innerblockbodybgcolor]
-               (innerblockbody.south west) rectangle (innerblocktitle.north east);
-       \else
-             \draw[draw=none, fill=innerblockbodybgcolor]
-                 (innerblockbody.south west) rectangle (innerblockbody.north east);
-        \fi
-    \end{scope}
-}
-
 
 % Redefine block title stuff
 \usepackage{xpatch}
-%% \xpatchcmd{\block}{\it\LARGE\color{blocktitlefgcolor}}{\sffamily\itshape\LARGE\color{blocktitlefgcolor}}{}{}
 \xpatchcmd{\block}{\bf\LARGE\color{blocktitlefgcolor}}{\bfseries\Huge\color{eccvblue}}{}{}
 \xpatchcmd{\innerblock}{\bf \color{innerblocktitlefgcolor}}{\bfseries\color{eccvblue}}{}{}
+% remove space that empty innerblock title leaves behind
+\makeatletter
+\xpatchcmd{\innerblock}{\node[minimum width=\TP@innerblocktitlewidth, minimum height=\TP@innerblocktitleheight, anchor=center] (innerblocktitle)}{\node[inner sep=0pt, minimum width=\TP@innerblocktitlewidth, minimum height=\TP@innerblocktitleheight, anchor=center] (innerblocktitle)}{}{}
+\makeatother
+
 %% redo font stuff here I guess
 %% Inner body text style
-\xpatchcmd{\block}{#3}{\LARGE#3}{}{}
+\xpatchcmd{\block}{#3}{\fontsize{35}{42}#3}{}{}
 
 \definecolor{eccvlightblue}{HTML}{009EE0}
 % more gray blue ish but makes a good background color
@@ -156,7 +147,7 @@
 
 \definetitlestyle{simpletitle}{
 width=800mm, roundedcorners=0, linewidth=0pt, innersep=0pt,
-titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
+titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 \begin{scope}[line width=\titlelinewidth, rounded corners=\titleroundedcorners]
 \draw[color=white, fill=titlebgcolor] % notice the white hack
 (\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);
@@ -174,7 +165,6 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 \date{\today}
 \institute{University of Amsterdam}
 \titlegraphic{\includegraphics[width=6.0cm]{UVA-plain}}
-
 
 % 🐝🐝🐝🐝🐝 Do something with alternating lightblue and white backgrounds
 % But with black text
@@ -221,12 +211,16 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 % No need for margins if there is no box
 % looks a tiny bit weirder without margins?
 % make sure the line thickness matches the box thickness
-%% \innerblock{}{
 % The rule could possibly be done in tikz
-{\huge
-  Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation. \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}}
-%% }
+{
+  %% \huge
+  \fontsize{45}{54}
+  %% Needs to contain some reference to subitizing
+  \innerblock[bodyinnersep=40pt]{}{Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation. \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}}
 }
+\vspace*{-30pt} % not sure why this is needed
+}
+
 
 \begin{columns}
 \column{0.5}
@@ -248,9 +242,10 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 \column{0.5}
 % "immediate" seems appropiate bc it conveys both directness and the 
 % fact that subitizing shows (very little) temporal delay
+
 \block{SUBITIZING}{
 \colorlet{innerblockbodybgcolor}{white}
-\innerblock{}{\boldblue{Subitizing} is a perceptual skill shared by many animals that allows them to immediately percieve the numerosity of small sets. The amount of elephants in each of the images below should be visible without counting, except for when the amount of elephants lies outside of the visual \boldblue{subitizing range} of $1$-$4$.}
+\innerblock{}{\boldblue{Subitizing} is a perceptual skill shared by many animals that allows them to immediately percieve the numerosity of small sets. The amount of elephants in each of the images below should be visible without counting, except for when the amount of elephants lies outside of the visual \boldblue{subitizing range} of 1 -- 4.}
 %% \begin{figure}%
 %% \subfloat{\includegraphics[width=5.15cm,valign=c]{vstack_e}}
 %% \quad
@@ -260,6 +255,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 \innerblock{}{
 \begin{tikzfigure}
 %% \includegraphics{vstack_e} 
+\centering
 \includegraphics[width=15cm]{e4} 
 \end{tikzfigure}
 }
@@ -271,14 +267,19 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 
 %% \begin{columns}
 %% \column{0.5}
-%% \useinnerblockstyle{Minimal}
+%% \useblockstyle{eccv2horizontal}
 \block{OPTIMIZATIONS}{
-\colorlet{innerblockbodybgcolor}{white}
 %% \begin{minipage}[t]{0.4\linewidth}
-\begin{multicols*}{2}
+\colorlet{innerblockbodybgcolor}{white}
+\setlength\columnsep{0pt}
+\setlength\multicolsep{-1.1pt} % this number is dependend on the fontsize
+%% \setcounter{columnbadness}{7000}
+%% \setcounter{finalcolumnbadness}{7000}
+\begin{multicols}{2}
 \innerblock{}{
+\begin{tikzfigure}\includegraphics[width=31.0cm]{bce_dfc_crop}\end{tikzfigure}
 \boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss which uses intermediate layer representations in the objective function of the autoencoder.
-\begin{tikzfigure}\includegraphics[width=31cm]{bce_dfc_crop}\end{tikzfigure}
+%% \vskip -0.65em
 }
 %% \end{minipage}
 %% \begin{adjustbox}{valign=t}
@@ -286,25 +287,28 @@ titletotopverticalspace=40pt, titletoblockverticalspace=40pt}{
 %% \useinnerblockstyle{eccvinnerhorizontal}
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
-A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds. Subsequently, we apply random image transforms to each object to increase diversity in appearance. 
 \begin{tikzfigure}\includegraphics[width=15cm]{syn2}\end{tikzfigure}
+A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds. Subsequently, we apply random image transforms to each object to increase diversity in appearance. 
+%% \vskip -0.5em
+\vskip 0.11em
 }
-\end{multicols*}
+\end{multicols}
 %% \end{minipage}
 %% \end{adjustbox}
 }
 
-%% \column{0.5}
-\block{RESULTS}{
-\useinnerblockstyle{eccvinner}
+\begin{columns}
+\column{0.435}
+\block{SUBITIZING TASK PERFORMANCE}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
 \begin{tikzfigure}
-    %% \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lllllll}
+    %% \begin{tabular*}{\innerblocklinewidth}{{\extracolsep{\fill}}lllllll}
     \begin{tabular}{lllllll}
     \toprule
     Count Label $\rightarrow$ & \quad 0 & \quad 1 & \quad 2 & \quad 3 & \quad 4+ & \quad mean \\
     \midrule
+    %% \rowcolor
     Chance & \quad 27.5 & \quad46.5 & \quad18.6 & \quad11.7 & \quad\phantom{0}9.7 & \quad22.8 \\
     GIST & \quad 67.4 & \quad65.0 & \quad32.3 & \quad17.5 & \quad24.7 & \quad41.4 \\
     SIFT+IFV & \quad 83.0 & \quad68.1 & \quad35.1 & \quad26.6 & \quad38.1 & \quad50.1 \\
@@ -317,6 +321,22 @@ A mixture of natural images and \boldblue{synthetic data} was used to augment th
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{\boldblue{VAE + softmax.} \blindlist{enumerate}[2]}
 }
+\column{0.565}
+%% \block{QUALITATIVE ANALYSIS}{
+%% \colorlet{innerblockbodybgcolor}{white}
+%% \innerblock{}{
+%%   \begin{tikzfigure}
+%%     \includegraphics[width=35cm]{bird_varied_crop}
+%%   \end{tikzfigure}
+%% }
+%% \colorlet{innerblockbodybgcolor}{eccvgrayblue}
+%% \innerblock{}{
+%%   \begin{tikzfigure}
+%%     \includegraphics[width=18cm]{NA}
+%%   \end{tikzfigure}
+%% }
+%% }
+\end{columns}
 
 %% \end{columns}
 
@@ -328,9 +348,11 @@ A mixture of natural images and \boldblue{synthetic data} was used to augment th
 %% \end{columns}
 
 \useblockstyle{reference}
-\block{}{\noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
-\bibliography{poster}}
-%% \begin{center}
-%% \end{center}
+% not sure if this actually centers text but it is more centered I guess
+\block[bodyinnersep=12pt, bodyoffsetx=19pt]{}{\noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
+\begin{center}
+\bibliography{poster}
+\end{center}
+}
 
 \end{document}
