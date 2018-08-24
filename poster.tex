@@ -42,21 +42,13 @@
 % remove "References" heading in natbib
 \renewcommand{\bibsection}{}
 
-%% \renewenvironment{tikzfigure}[1][]{
-%%   \def \rememberparameter{#1}
-%%   \vspace{10pt}
-%%   \refstepcounter{figurecounter}
-%%   \begin{center}
-%%   \tabular{l}
-%%   }{
-%%     \ifx\rememberparameter\@empty
-%%     \else %nothing
-%%     \\[10pt]
-%%     {\small Fig.~\thefigurecounter: \rememberparameter }
-%%     \fi
-%%   \endtabular
-%%   \end{center}
-%% }
+\renewenvironment{tikzfigure}[1][]{
+  \def \rememberparameter{#1}
+  \refstepcounter{figurecounter}
+  \begin{center}
+  }{\end{center}
+}
+
 
 % based on "Minimal" blockstyle
 % body ofsett 1 is nice bc of the titleless innerblock "glitch"
