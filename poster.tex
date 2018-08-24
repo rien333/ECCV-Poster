@@ -42,6 +42,22 @@
 % remove "References" heading in natbib
 \renewcommand{\bibsection}{}
 
+%% \renewenvironment{tikzfigure}[1][]{
+%%   \def \rememberparameter{#1}
+%%   \vspace{10pt}
+%%   \refstepcounter{figurecounter}
+%%   \begin{center}
+%%   \tabular{l}
+%%   }{
+%%     \ifx\rememberparameter\@empty
+%%     \else %nothing
+%%     \\[10pt]
+%%     {\small Fig.~\thefigurecounter: \rememberparameter }
+%%     \fi
+%%   \endtabular
+%%   \end{center}
+%% }
+
 % based on "Minimal" blockstyle
 % body ofsett 1 is nice bc of the titleless innerblock "glitch"
 % (see stackexchange link below)
@@ -334,7 +350,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 \begin{multicols}{2}
 {\boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss which uses intermediate layer representations in the objective function of the autoencoder.\par}
 {A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds. Subsequently, we apply random image transforms to each object to increase diversity in appearance. }
-\vskip 0.11em
+%% \vskip 0.11em
 \end{multicols}
 }
 }
