@@ -42,12 +42,15 @@
 % remove "References" heading in natbib
 \renewcommand{\bibsection}{}
 
-\renewenvironment{tikzfigure}[1][]{
-  \def \rememberparameter{#1}
-  \refstepcounter{figurecounter}
-  \begin{center}
-  }{\end{center}
-}
+%% \renewenvironment{tikzfigure}[1][]{
+%%   \begin{center}
+%%   \hspace{0pt}
+%%   \vfill
+%%   }{
+%%   \vfill
+%%   \hspace{0pt}
+%%   \end{center}
+%% }
 
 
 % based on "Minimal" blockstyle
@@ -293,8 +296,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
 \begin{tikzfigure}
-%% \includegraphics{vstack_e} 
-\centering
+%% \includegraphics{vstack_e}
 \includegraphics[width=15cm]{e4} 
 \end{tikzfigure}
 }
