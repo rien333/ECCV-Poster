@@ -92,7 +92,7 @@
       % sorta add these corrdinates/values to the start
       %% +(0.5\linewidth,0cm) coordinate (c1);
       %% \draw [line width=0.42cm,eccvgrayblue, dashed, dash pattern=on 20pt off 20pt] (blockbody.south) -- (blockbody.north);
-      \draw [line width=0.2cm,eccvgrayblue] (blockbody.south) -- (blockbody.north);
+      \draw [line width=0.14cm,eccvgrayblue] (blockbody.south) -- (blockbody.north);
     \end{scope}
 }
 
@@ -185,7 +185,7 @@
 
 \definetitlestyle{simpletitle}{
 width=800mm, roundedcorners=0, linewidth=0pt, innersep=0pt,
-titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
+titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 \begin{scope}[line width=\titlelinewidth, rounded corners=\titleroundedcorners]
 \draw[color=white, fill=titlebgcolor] % notice the white hack
 (\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);
@@ -254,32 +254,24 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 % The rule could possibly be done in tikz
 {
   %% \huge
-  \fontsize{45}{54}
   %% Needs to contain some reference to subitizing
-  \innerblock[bodyinnersep=40pt]{}{Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation. \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}}
+  %% \innerblock[bodyinnersep=40pt]{}{
+  \begin{center}
+    \begin{minipage}{0.99\linewidth}
+      {\LARGE
+      Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation.\par} % \par changes a lot
+      \end{minipage}
+  \end{center}
+  \vspace*{10pt}
+ \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}}
 }
 \vspace*{-30pt} % not sure why this is needed
-}
+
 
 
 \begin{columns}
-\column{0.5}
-\block{VARIATIONAL AUTOENCODER}{
-\colorlet{innerblockbodybgcolor}{white}
-\innerblock{}{\boldblue{VAEs} learn to map data samples $X$ to a posterior distribution \mbox{$Q(z \mid X)$} rather than a deterministic latent representation as used in conventional autoencoders. Inputs can be reconstructed by sampling latent vector $z$ from the posterior distribution and passing it through a decoder network. To make sampling feasible, the posterior distribution is parametrized by a Gaussian distribution with its mean and variance predicted by the encoder.}
-\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+\column{0.55}
 
-\innerblock{}{Together, the VAE's objective function is the summation of a reconstruction term (negative log-likelihood of the data) and the KL regularization:
-%
-\begin{align}
-  %\log P(X) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z \mid X)] = E[\log P(X \mid z) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]]
-  \mathcal{L}_{VAE} = E[\log P(X \mid z)] - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]
-\end{align}}
-
-\colorlet{innerblockbodybgcolor}{white}
-\innerblock{}{\blindlist{itemize}[1]}
-}
-\column{0.5}
 % "immediate" seems appropiate bc it conveys both directness and the 
 % fact that subitizing shows (very little) temporal delay
 
@@ -303,6 +295,22 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 \innerblock{}{The \boldblue{Salient Object Subtizing Dataset} \citep{zhang2016salient} catered to learning subitizing}
 }
 
+\column{0.45}
+\block{VARIATIONAL AUTOENCODER}{
+\colorlet{innerblockbodybgcolor}{white}
+\innerblock{}{\boldblue{VAEs} learn to map data samples $X$ to a posterior distribution \mbox{$Q(z \mid X)$} rather than a deterministic latent representation as used in conventional autoencoders. Inputs can be reconstructed by sampling latent vector $z$ from the posterior distribution and passing it through a decoder network. To make sampling feasible, the posterior distribution is parametrized by a Gaussian distribution with its mean and variance predicted by the encoder.}
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+
+\innerblock{}{Together, the VAE's objective function is the summation of a reconstruction term (negative log-likelihood of the data) and the KL regularization:
+%
+\begin{align}
+  %\log P(X) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z \mid X)] = E[\log P(X \mid z) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]]
+  \mathcal{L}_{VAE} = E[\log P(X \mid z)] - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]
+\end{align}}
+
+\colorlet{innerblockbodybgcolor}{white}
+\innerblock{}{\blindlist{itemize}[1]}
+}
 \end{columns}
 
 %% \begin{columns}
@@ -369,6 +377,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 \block{SUBITIZING TASK PERFORMANCE}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
+\vspace*{75pt}
 \begin{tikzfigure}
     %% \begin{tabular*}{\innerblocklinewidth}{{\extracolsep{\fill}}lllllll}
     \begin{tabular}{lllllll}
@@ -384,25 +393,31 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
     \bottomrule
     \end{tabular}
 \end{tikzfigure}
+\vspace*{75pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
-\innerblock{}{\boldblue{VAE + softmax.} \blindlist{enumerate}[2]}
+\innerblock{}{\vspace*{120pt} \boldblue{VAE + softmax.} \blindlist{enumerate}[2] \vspace*{120pt}}
 }
 \column{0.565}
-%% \block{QUALITATIVE ANALYSIS}{
-%% \colorlet{innerblockbodybgcolor}{white}
-%% \innerblock{}{
-%%   \begin{tikzfigure}
-%%     \includegraphics[width=35cm]{bird_varied_crop}
-%%   \end{tikzfigure}
-%% }
-%% \colorlet{innerblockbodybgcolor}{eccvgrayblue}
-%% \innerblock{}{
-%%   \begin{tikzfigure}
-%%     \includegraphics[width=18cm]{NA}
-%%   \end{tikzfigure}
-%% }
-%% }
+\block{QUALITATIVE ANALYSIS}{
+\colorlet{innerblockbodybgcolor}{white}
+\innerblock{}{
+  % all tikz figures need slight manual recentering
+  % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
+  \begin{tikzfigure}
+    \vspace*{-10pt}
+    \includegraphics[width=0.49\linewidth]{NA}
+    \includegraphics[width=0.49\linewidth]{NN}
+  \end{tikzfigure}
+}
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+\innerblock{}{
+  \vspace*{-10pt}
+  \begin{tikzfigure}
+    \includegraphics[width=40cm]{bird_varied_crop}
+  \end{tikzfigure}
+}
+}
 \end{columns}
 
 %% \end{columns}
@@ -414,12 +429,19 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 %% \block{Blocktile}{text}
 %% \end{columns}
 
+% screws with the centering
+%% \renewcommand*{\bibfont}{\small}
+
 \useblockstyle{reference}
 % not sure if this actually centers text but it is more centered I guess
-\block[bodyinnersep=12pt, bodyoffsetx=19pt]{}{\noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
-\begin{center}
-\bibliography{poster}
-\end{center}
+\block[bodyinnersep=5pt, bodyoffsetx=19pt]{}{\noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
+{
+  \begin{center}
+    \begin{minipage}{0.7\linewidth}
+    \bibliography{poster}
+    \end{minipage}
+  \end{center}
+}
 }
 
 \end{document}
