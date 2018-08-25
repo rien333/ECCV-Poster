@@ -11,7 +11,6 @@
 \usepackage{fix-cm}
 \usepackage{stackengine}
 \usepackage{graphicx}
-\usepackage[export]{adjustbox}
 \usepackage[utf8]{inputenc}
 \usepackage{float}
 
@@ -93,7 +92,7 @@
       % sorta add these corrdinates/values to the start
       %% +(0.5\linewidth,0cm) coordinate (c1);
       %% \draw [line width=0.42cm,eccvgrayblue, dashed, dash pattern=on 20pt off 20pt] (blockbody.south) -- (blockbody.north);
-      %% \draw [line width=0.2cm,lightgrey] (blockbody.south) -- (blockbody.north);
+      \draw [line width=0.2cm,eccvgrayblue] (blockbody.south) -- (blockbody.north);
     \end{scope}
 }
 
@@ -296,6 +295,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 \innerblock{}{
 \begin{tikzfigure}
 %% \includegraphics{vstack_e}
+\vspace*{-15pt}
 \includegraphics[width=15cm]{e4} 
 \end{tikzfigure}
 }
@@ -311,26 +311,41 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 \block{OPTIMIZATIONS}{
 %% \begin{minipage}[t]{0.4\linewidth}
 
-\useinnerblockstyle{eccvinner}
+\useinnerblockstyle{eccvinneroptimizations}
 \colorlet{innerblockbodybgcolor}{white}
-\renewcommand{\columnseprulecolor}{\color[HTML]{E2F1F9}}
-\setlength\columnseprule{0.10cm}
-\setlength\columnsep{0pt}
-\setlength\multicolsep{-1.1pt} % this number is dependend on the fontsize
+%% \renewcommand{\columnseprulecolor}{\color[HTML]{E2F1F9}}
+%% \setlength{\parskip}{0pt plus 1pt}
+%% \setlength{\oddsidemargin}{0pc}
+%% \setlength{\marginparwidth}{0pc}
+%% \setlength{\topmargin}{0.0pc}
+%% \setlength\columnseprule{0.12cm}
+%% \setlength\columnsep{0pt}
+%% \setlength\multicolsep{-1.1pt} % this number is dependend on the fontsize
+
 %% \setcounter{columnbadness}{7000}
 %% \setcounter{finalcolumnbadness}{7000}
+%% \setcounter{collectmore}{-1}
+%% \begin{multicols}{2}
 \innerblock[bodyinnersep=25pt]{}{
-\begin{multicols}{2}
-  {\begin{tikzfigure} \includegraphics[width=0.8\linewidth]{bce_dfc_crop}\end{tikzfigure}}
-  { \begin{tikzfigure}
-      \centering
-        \includegraphics[width=0.195\linewidth]{syn1}
-        \includegraphics[width=0.195\linewidth]{syn2}
-        \includegraphics[width=0.195\linewidth]{syn3}
-        \includegraphics[width=0.195\linewidth]{syn4}
-  \end{tikzfigure}
-  }
-\end{multicols}
+  \centering
+  \begin{minipage}{0.494\linewidth}
+    \centering
+    \begin{tikzfigure}
+      \vspace*{-10pt}
+      \includegraphics[width=0.8\linewidth]{bce_dfc_crop}
+    \end{tikzfigure}
+  \end{minipage}\hfill
+  \begin{minipage}{0.494\linewidth}
+    \centering
+    %% \hspace*{45pt}
+    \begin{tikzfigure}
+      \hspace*{15pt}\includegraphics[width=0.23\linewidth]{syn1}
+      \includegraphics[width=0.23\linewidth]{syn2}
+      \includegraphics[width=0.23\linewidth]{syn3}
+      \includegraphics[width=0.23\linewidth]{syn4}
+    \end{tikzfigure}%
+ \end{minipage}%
+  
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 
@@ -338,7 +353,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=5pt}{
 \innerblock{}{
 \renewcommand{\columnseprulecolor}{\color[HTML]{FFFFFF}}
 \setlength\columnsep{90pt}
-\setlength\columnseprule{0.05cm}
+\setlength\columnseprule{0.12cm}
 %% \setlength\columnseprule{0.0cm}
 \begin{multicols}{2}
 {\boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss which uses intermediate layer representations in the objective function of the autoencoder.\par}
