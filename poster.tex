@@ -88,11 +88,13 @@
       \fill[eccvgrayblue]
       	(blocktitle.south west) rectangle (blocktitle.north east);
       % seperator line
-      %% \path (blockbody.south west) 
+      \path (blockbody.south) 
       % sorta add these corrdinates/values to the start
-      %% +(0.5\linewidth,0cm) coordinate (c1);
+      +(0.0cm,9cm) coordinate (c1);
+      \path (blockbody.north)
+      +(0.0cm, -1cm) coordinate (c2);
       %% \draw [line width=0.42cm,eccvgrayblue, dashed, dash pattern=on 20pt off 20pt] (blockbody.south) -- (blockbody.north);
-      \draw [line width=0.14cm,eccvgrayblue] (blockbody.south) -- (blockbody.north);
+      \draw [line width=0.15cm,eccvgrayblue] (c1) -- (c2);
     \end{scope}
 }
 
@@ -326,8 +328,8 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 %% \setlength{\oddsidemargin}{0pc}
 %% \setlength{\marginparwidth}{0pc}
 %% \setlength{\topmargin}{0.0pc}
-%% \setlength\columnseprule{0.12cm}
-%% \setlength\columnsep{0pt}
+%% \setlength\columnseprule{0.15cm}
+
 %% \setlength\multicolsep{-1.1pt} % this number is dependend on the fontsize
 
 %% \setcounter{columnbadness}{7000}
@@ -406,8 +408,8 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
     \vspace*{-10pt}
-    \includegraphics[width=0.49\linewidth]{NA}
     \includegraphics[width=0.49\linewidth]{NN}
+    \includegraphics[width=0.49\linewidth]{NA}
   \end{tikzfigure}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
@@ -437,8 +439,8 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 \block[bodyinnersep=5pt, bodyoffsetx=19pt]{}{\noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
 {
   \begin{center}
-    \begin{minipage}{0.7\linewidth}
-    \bibliography{poster}
+    \begin{minipage}{0.5\linewidth}
+    {\small\bibliography{poster}}
     \end{minipage}
   \end{center}
 }
