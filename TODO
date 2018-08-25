@@ -1,38 +1,115 @@
 - [x] Latex of PS?
   - latex lijkt kut, maar je kan op zich wel makkelijk boxes en whatever maken (twee collumen, of allemaal 
   rijen met _n_-collumen als een soort grid)
-- [ ] Font
+- [x] Font
   - examples/scientific-poster-template_blah.png
-- [ ] Make font bigger (can only be done by https://tex.stackexchange.com/questions/243678/how-to-make-tikzposter-work-with-font-sizes-larger-than-25pt i think)
+- [x] Make font bigger (can only be done by https://tex.stackexchange.com/questions/243678/how-to-make-tikzposter-work-with-font-sizes-larger-than-25pt i think)
 - [x] 3 columns met in het midden afbeeldingen
-- [ ] Title
+- [x] Title
   - Bigger, bolder (HUGE size?)
   - horitzontal layout
     - Two collumny, like Firbushposter2.png
-- [ ] Blocktitles
+- [x] Blocktitles
   - Consider a light blue background
     - coupled with white text?
     - Gradients?
     - removes the need for larrger outlines so you can make them blak and sharp
     - Make title backgrounds slide in as in scientific-poster-template-portrait-portrait-poster-template-poster-presentation-template-portrait.png
-- [ ] The title looks weird with all other black text
+- [x] The title looks weird with all other black text
   - esp with the author thingy
   - So consider making everything grayish and giving the titles a bg (like above)
 - [ ] Subitizing example
  - Elephants
  - The OG 5?
 - [ ] Maybe you can do a hierarchical graph of a brain thingy to point to structural similarities
-- [ ] Reread pointe for the working of subitizing (something with the visiospatial system)
-- [ ] math font is weird
-- [ ] Alternating colors automatically is too much work and sometimes unneeded, specify manually
-- [ ] make bold text also darkblue
-- [ ] consider making the UvA logo blue
-- [ ] Short introduction with whatt we did, without title?
+- [ ] Reread Pointe (?) for the working of subitizing (something with the visiospatial system)
+- [x] math font is weird
+  - Still kinda weird but less weird
+- [x] Alternating colors automatically is too much work and sometimes unneeded, specify manually
+- [x] make bold text also darkblue
+- [x] consider making the UvA logo blue
+- [x] Short introduction with whatt we did, without title?
   - Seperate from the rest with a horitzontal line
-- [ ] Maybe it's just me, but the spacing between lines seems kinda large
-- [ ] Choose a light blue based on hexcolor/xcolor
+- [x] Maybe it's just me, but the spacing between lines seems kinda large
+- [x] Choose a light blue based on hexcolor/xcolor
 - [ ] Andere synthetische afbeeldingen? je had nog zo'n map voor de eindpresentatie
 - [ ] remove the car from the dfc compare thingy
-- [ ] Citations
+  - whait i think the width of the image is not that much of a problem
+- [x] Citations
   - consider shorter styles (less info)
   - long thingy at the bottom
+- [x] Lines can be a tiny bit "shaper" so less tick and a tinsy bit more black
+- [x] give optimization the breadth so like
+    [fpl blahh blah   ] 	[synthetic data]
+    [white background ]     [bluegray background]
+    [dfc compare image]     [synthetic images]
+ - [x] instead of the breadth thing above, try the background only on the
+       lower textblocks
+       	   - The easiest way to do this is probaly to have two innerblocks,
+           one with the two images and one the two texts. And then place
+           stuff horizontal in those innerblocks
+           - probably needs a vertical seperation line tho
+- [x] Make table lines blue as well?
+- [ ] make table full width
+  - or just make it's block small, like now
+- [x] make references font smaller
+- [x] glitchty corner stuff
+- [x] the elephants picture is (looks?) not centered 
+  - vspace ftw
+- [x] references do not look centered
+  - Probably okay now
+- [x] The last innerblock needs to be a tiny bit round to not 
+- [ ] higher (not like completely) quality qualative analysis render 
+  - change font and background
+- [x] research into the poster size
+  - 1.20x1.00m 
+    - a0 fits, but anything larger doesn't
+- [x] maybe have the size dectectors next to the performance
+  - and then the big bird somewhere underthere
+- [x] make the birds background transparent
+- [ ] measure things to see if they are off
+  - digital ruler? (linux?)
+  - see posterRules.pdf, some minor changes are required.
+- [ ] make the seperator line start and stop, like the columnn sep
+  - or make the column sep longer?
+
+# Contents
+
+- [ ] u forgot the whole emergence zozori stuff
+  - mention in the subitizing thing? (or is this double with the into)
+  - read back the original paper for a formulation
+- [ ] List the contributions similair to tom's example in the intro
+  - theory: (emergent (do we use this term)) numerosity estimation
+  - method: unsupervised VAE (hierachical?/cnn paratemerized) (with training optimizations)
+  - Dataset:  (less important, **mention something else?**) SOS?
+  - Evaluation: performs okay and possiblly anougolous with brain functioning
+- [ ] Tell something about the other methods in the subitizing performance thing
+  - Start with "We evaluate our model's subitizing performance on...(SOS test set, frozen parameters)"
+- [ ] If you need a slight explanition with the qualative analysis skip the birdies
+  - ask Tom if he would rather have the birdies or 
+  - remember to learn the argument on why our evaluation is noisier
+    - Each dimension encodes more than one property
+- [ ] Introduction
+  - Read the abstract and conclusion and see if u missed anything
+- [ ] fpl can probably use a reference
+- [ ] In the VAE thing, mention more like why they are an interesting thinh
+      - unsupervised blah blah, also see tom's text about parametrization 
+        and stuff
+            - parameterized by hierachical/deep CNNs(check terminology of paper)
+      - Include a graph? Like just the one you made and ask if tom likes the 
+        idea and then remake it 
+            - graph or formula? or both?
+    - if you're gonna keep the formula in it's probably a good idea to 
+    study up on it somemore 
+        - i.e. have something interesting to say about it
+          - So I guess that the 2nd term just stands for
+            Q(z|X) learned mu and sigma that encode data into z's
+          - The first term is
+          1. z is actually a complicated learned function generation zs
+          2. this z function is parameterized by learned thetas that given 
+             the data learns to generate the parameters (i.e. mu, sigma) 
+             of probablisttic model that best fits the input
+             This is called **Maximum likelihood estimation**. https://towardsdatascience.com/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1)
+             (and then the reconstruction term sort measures how well these 
+             parameters do according to some kind of similarity measure (but 
+             this is only for the updates?))
