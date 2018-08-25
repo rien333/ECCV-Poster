@@ -261,7 +261,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
   \begin{center}
     \begin{minipage}{0.99\linewidth}
       {\LARGE
-      Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation.\par} % \par changes a lot
+      Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder (VAE) for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation.\par} % \par changes a lot
       \end{minipage}
   \end{center}
   \vspace*{10pt}
@@ -279,8 +279,9 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 
 \block{SUBITIZING}{
 \colorlet{innerblockbodybgcolor}{white}
+% drop "instances" after the "1-4"?
 \innerblock{}{\boldblue{Subitizing} is a perceptual skill shared by many animals allowing them to immediately percieve the numerosity of small sets. 
-When the \boldblue{subitizing range} of 1 -- 4 is exceeded, other cogntive mechanisms are employed to arrive at an instance count. }
+When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogntive mechanisms are employed to arrive at an instance count. }
 %% \begin{figure}%
 %% \subfloat{\includegraphics[width=5.15cm,valign=c]{vstack_e}}
 %% \quad
@@ -291,12 +292,24 @@ When the \boldblue{subitizing range} of 1 -- 4 is exceeded, other cogntive mecha
 \begin{tikzfigure}
 %% \includegraphics{vstack_e}
 \vspace*{-15pt}
-\includegraphics[width=15cm]{e4} 
+\includegraphics[width=0.245\linewidth]{s1} 
+\includegraphics[width=0.245\linewidth]{s2} 
+\includegraphics[width=0.245\linewidth]{s3} 
+\includegraphics[width=0.245\linewidth]{s4r} 
 \end{tikzfigure}
 }
 \colorlet{innerblockbodybgcolor}{white}
 % make sure you mention sorta "what our model" is somwhere(or just rewrite)
-\innerblock{}{Images catered to learning subitizing taken \boldblue{Salient Object Subtizing Dataset} \citep{zhang2016salient} to train our model. }
+% instead of VAEs: artificial learning, ANN/CNNs, deep learning
+%	- emerges as a statistical property of images (in ANNs trained in an unsupervised manner)
+%	- a latent structure that is important in modeling the visual world
+% make sure the intro mentions something about emergence/visual number sense 
+% in humans 
+% 	- whait is "emergent" even coined in the paper 
+%   	- spontaneous, etc.
+\innerblock{}{We explore the emergence of the perceptual skill of subitizing in VAEs using \boldblue{natural images} from the \boldblue{Salient Object Subtizing Dataset} \citep{zhang2016salient} to train our model. 
+% Similair to previous work, we hope to show that (emergence/visual number sesnse).
+}
 }
 
 \column{0.45}
@@ -441,8 +454,8 @@ When the \boldblue{subitizing range} of 1 -- 4 is exceeded, other cogntive mecha
 \block[bodyinnersep=5pt, bodyoffsetx=19pt]{}{\noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
 {
   \begin{center}
-    \begin{minipage}{0.5\linewidth}
-    {\small\bibliography{poster}}
+    \begin{minipage}{0.7\linewidth}
+    {\bibliography{poster}}
     \end{minipage}
   \end{center}
 }
