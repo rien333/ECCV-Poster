@@ -452,19 +452,19 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \end{columns}
 
 % screws with the centering
-%% \renewcommand*{\bibfont}{\small}
+\renewcommand*{\bibfont}{\large}
 
 \useblockstyle{reference}
 % not sure if this actually centers text but it is more centered I guess
 \block[bodyinnersep=5pt, bodyoffsetx=19pt]{}{
 %% \vspace*{15pt}
 \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
-%% \vspace*{0pt}
+\vspace*{-10pt}
 {
   \begin{center}
-    \begin{minipage}{0.95\linewidth}
+    \begin{minipage}{0.94\linewidth}
     % maybe print as /small text
-    \bibliography{poster}
+    {\bibliography{poster}}
     \end{minipage}
   \end{center}
 }
