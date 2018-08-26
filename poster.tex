@@ -1,7 +1,7 @@
 %% margin: The margin between outer edge of the poster and the edge of the paper; i.e. ultimate margin
 %% innermargin: The margin from the edge of the poster edge to the outermost edge of the blocks; i.e. content margin
 %% colspace (horitzontal collumn space?) needs to be high before it's noticable
-% innermargin was 40pt, idk what's printable🎍
+% innermargin was 40pt, idk what's printable
 \documentclass[25pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=45pt, blockverticalspace=45pt]{tikzposter}
 
 % dummy text generation
@@ -24,8 +24,8 @@
 \usepackage{sfmath}
 
 % Bibliography
-\usepackage[square,numbers]{natbib}
-\bibliographystyle{abbrvnat}
+\usepackage[square,numbers, sort&compress]{natbib}
+\bibliographystyle{unsrtnat}
 % this only redefines the citations in text
 %% \renewcommand{\citenumfont}[1]{\textbf{#1}}
 \renewcommand{\bibnumfmt}[1]{\textbf{[#1]} \,}
@@ -288,7 +288,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 \colorlet{innerblockbodybgcolor}{white}
 % drop "instances" after the "1-4"?
 \innerblock{}{\boldblue{Subitizing} is a perceptual ability that enables near-instantaneous and spontaneous identification of the numerosity of small visual sets. 
-When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogntive mechanisms are employed to arrive at an instance count. }
+When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cognitive mechanisms are employed to arrive at an instance count. }
 %% \begin{figure}%
 %% \subfloat{\includegraphics[width=5.15cm,valign=c]{vstack_e}}
 %% \quad
@@ -314,7 +314,7 @@ When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogn
 % in humans 
 % 	- whait is "emergent" even coined in the paper 
 %   	- spontaneous, etc.
-\innerblock{}{We explore the emergence of visual number sense in deep networks trained in an unsupervised setting on \boldblue{natural images} from the \boldblue{Salient Object Subtizing Dataset} \citep{zhang2016salient}. The complexity of natural visual scenes helps capture the abstract nature of number sense.
+\innerblock{}{We explore the emergence of visual number sense in deep networks trained in an unsupervised setting on \boldblue{natural images} from the \boldblue{Salient Object Subitizing Dataset} \citep{zhang2016salient}. The complexity of natural visual scenes helps capture the abstract nature of number sense.
 % Similair to previous work, we hope to show that (emergence/visual number sesnse).
 }
 }
@@ -323,8 +323,9 @@ When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogn
 \block{VARIATIONAL AUTOENCODER}{
 \colorlet{innerblockbodybgcolor}{white}
 % Too long probably, maybe reduce to a figure
-% leave it
-\innerblock{}{\boldblue{VAEs} are a generative algorithm that perform \boldblue{unsupervised} representation learning. Instead of mapping data samples $X$ to a deterministic latent representation as in conventional autoencoders, VAEs learn a posterior distribution \mbox{$Q(z \mid X)$}. Inputs can be reconstructed by sampling latent vectors $z$ from the posterior distribution and passing them through a decoder network. We parameterize the encoder and decoder network with deep CNNs.}
+% Doersch mentions "the distribution Q" so u don't have to write
+% "Q(z|X)" all the time
+\innerblock{}{\boldblue{VAEs} are generative algorithms that perform \boldblue{unsupervised} representation learning. Instead of mapping data samples $X$ to a deterministic latent representation as in conventional autoencoders, VAEs learn a posterior distribution \mbox{$Q(z \mid X)$}. Input reconstruction proceeds by sampling latent vectors $z$ from $Q$ and passing them through a decoder network. We parameterize the encoder and decoder network with deep CNNs.}
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 
 \innerblock{}{
@@ -337,7 +338,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 
 \colorlet{innerblockbodybgcolor}{white} 
 % move CNN stuff upwards?
-\innerblock{}{To make sampling feasible posterior distribution \mbox{$Q(z | X)$} is (Guassian stuff). P(z) is often implemented as...) }
+\innerblock{}{Sampling is made feasible by parameterizing $Q$ as a Gaussian with learned mean and variance parameters. P(z) is typically a unit Gaussian. }
 }
 \end{columns}
 
@@ -392,8 +393,8 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \setlength\columnseprule{0.12cm}
 %% \setlength\columnseprule{0.0cm}
 \begin{multicols}{2}
-{\boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss which uses intermediate layer representations in the objective function of the autoencoder.\par}
-{A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds with various random image transformations applied. Although unrealistic looking, ... }
+{We observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent \boldblue{Feature Perceptual Loss} \citep{hou2017deep} which uses intermediate layer representations from a pretrained network in the objective function of the autoencoder.\par}
+{Augmentation of the SOS dataset with \boldblue{synthetic data} was required to familiarize the model with an extensive distribution of object types and the spatial configurations thereof. Images are synthesized by cut-pasting objects onto natural image backgrounds with various random image transformations applied.  }
 %% \vskip 0.11em
 \end{multicols}
 }
@@ -424,49 +425,46 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \vspace*{75pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
-\innerblock{}{\vspace*{120pt} \boldblue{VAE + softmax.} \blindlist{enumerate}[2] \vspace*{120pt}}
+\innerblock{}{We compare our \boldblue{unsupervised approach} to existing supervised approaches to instance counting. The strength of the representation learned by the VAE is measured by fixing it's parameters, and subsequently training a simple \boldblue{softmax classifier} that is latent representations of images with corresponding count labels. Performance is reported over the entire withheld SOS test set as count average precision ($\%$).}
 }
 \column{0.565}
-\block{QUALITATIVE ANALYSIS}{
+\block{SIZE-INVARIANT NUMEROSITY DETECTORS}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
   % all tikz figures need slight manual recentering
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
     \vspace*{-10pt}
-    \includegraphics[width=0.49\linewidth]{NN}
-    \includegraphics[width=0.49\linewidth]{NA}
+    \includegraphics[width=0.496\linewidth]{NN}
+    \includegraphics[width=0.496\linewidth]{NA}
   \end{tikzfigure}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
-  \vspace*{-10pt}
-  \begin{tikzfigure}
-    \includegraphics[width=40cm]{bird_varied_crop}
-  \end{tikzfigure}
+  %% \vspace*{-10pt}
+  %% \begin{tikzfigure}
+  %%   \includegraphics[width=40cm]{bird_varied_crop}
+  %% \end{tikzfigure}
+  % Reference here?
+  In alignment with studies on biological neural networks, an analysis of the learned representations revealed that numerosity is represented \boldblue{invariant to cumulative object area}. The results were obtained by performing a linear regression over a controlled synthetic dataset aimed at moderating object size   and visual variation in object and background classes. 
 }
 }
 \end{columns}
-
-%% \end{columns}
-
-%% \begin{columns}
-%% \column{0.6}
-%% \block{Blocktile}{text}
-%% \column{0.4}
-%% \block{Blocktile}{text}
-%% \end{columns}
 
 % screws with the centering
 %% \renewcommand*{\bibfont}{\small}
 
 \useblockstyle{reference}
 % not sure if this actually centers text but it is more centered I guess
-\block[bodyinnersep=5pt, bodyoffsetx=19pt]{}{\noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
+\block[bodyinnersep=5pt, bodyoffsetx=19pt]{}{
+%% \vspace*{15pt}
+\noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}
+%% \vspace*{0pt}
 {
   \begin{center}
-    \begin{minipage}{0.7\linewidth}
-    {\bibliography{poster}}
+    \begin{minipage}{0.95\linewidth}
+    % maybe print as /small text
+    \bibliography{poster}
     \end{minipage}
   \end{center}
 }
