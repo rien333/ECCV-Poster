@@ -72,7 +72,8 @@
   - see posterRules.pdf, some minor changes are required.
 - [ ] make the seperator line start and stop, like the columnn sep
   - or make the column sep longer?
-- [ ] The title and intro don't line up with the blocks
+- [x] The title and intro don't line up with the blocks
+  - they seem to do now but check on ur macbook
 
 # Contents
 
