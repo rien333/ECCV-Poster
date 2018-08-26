@@ -186,7 +186,7 @@
 
 
 \definetitlestyle{simpletitle}{
-width=800mm, roundedcorners=0, linewidth=0pt, innersep=0pt,
+width=807mm, roundedcorners=0, linewidth=0pt, innersep=0pt,
 titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 \begin{scope}[line width=\titlelinewidth, rounded corners=\titleroundedcorners]
 \draw[color=white, fill=titlebgcolor] % notice the white hack
@@ -248,7 +248,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 
 \maketitle
 
-\block{}{
+\block[bodyinnersep=0.00cm]{}{
 \colorlet{innerblockbodybgcolor}{white}
 % No need for margins if there is no box
 % looks a tiny bit weirder without margins?
@@ -259,17 +259,18 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
   %% Needs to contain some reference to subitizing
   %% \innerblock[bodyinnersep=40pt]{}{
   \begin{center}
-    \begin{minipage}{0.99\linewidth}
+    \begin{minipage}{1.0\linewidth}
       {\LARGE
       % nog niet erg smooth
       % ook te lang (misschien kan de 1e zin weg of anders)
       % 	- Als je de 1e zin weghaalt kun je misschien bij de laatste zin
       % 	  iets doen als "Provided that..."
-      Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we employ a hierarchically organized convolutional variational autoencoder (VAE) tasked with encoding and reconstructing training images. Given that numerosity is a key characteristic in the images, the underlying principle is that the network learns to encode visual numerosity in the latent representation.\par} % \par changes a lot
+      Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we employ a hierarchically organized convolutional variational autoencoder (VAE) tasked with encoding and reconstructing training images. Provided that numerosity is a key characteristic in the images, the network will learn to encode visual numerosity in the latent representation.\par} % \par changes a lot
       \end{minipage}
   \end{center}
-  \vspace*{10pt}
- \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}}
+  %% \vspace*{10pt}
+ %% \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}}
+}
 }
 \vspace*{-30pt} % not sure why this is needed
 
