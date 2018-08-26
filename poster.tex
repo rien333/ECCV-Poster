@@ -261,7 +261,11 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
   \begin{center}
     \begin{minipage}{0.99\linewidth}
       {\LARGE
-      Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets. Specifically, we use a variational autoencoder (VAE) for encoding and reconstructing training images. The underlying principle is that numerosity is a key characteristic in the images and the network learns to encode visual numerosity in the latent representation.\par} % \par changes a lot
+      % nog niet erg smooth
+      % ook te lang (misschien kan de 1e zin weg of anders)
+      % 	- Als je de 1e zin weghaalt kun je misschien bij de laatste zin
+      % 	  iets doen als "Provided that..."
+      Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we employ a hierarchically organized convolutional variational autoencoder (VAE) tasked with encoding and reconstructing training images. Given that numerosity is a key characteristic in the images, the underlying principle is that the network learns to encode visual numerosity in the latent representation.\par} % \par changes a lot
       \end{minipage}
   \end{center}
   \vspace*{10pt}
@@ -276,11 +280,12 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 
 % "immediate" seems appropiate bc it conveys both directness and the 
 % fact that subitizing shows (very little) temporal delay
+% I guess it doesn't really capture the "very little" parth tho
 
 \block{SUBITIZING}{
 \colorlet{innerblockbodybgcolor}{white}
 % drop "instances" after the "1-4"?
-\innerblock{}{\boldblue{Subitizing} is a perceptual skill shared by many animals allowing them to immediately percieve the numerosity of small sets. 
+\innerblock{}{\boldblue{Subitizing} is a perceptual ability that enables near-instantaneous and spontaneous identification of the numerosity of small visual sets. 
 When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogntive mechanisms are employed to arrive at an instance count. }
 %% \begin{figure}%
 %% \subfloat{\includegraphics[width=5.15cm,valign=c]{vstack_e}}
@@ -307,7 +312,7 @@ When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogn
 % in humans 
 % 	- whait is "emergent" even coined in the paper 
 %   	- spontaneous, etc.
-\innerblock{}{We explore the emergence of the perceptual skill of subitizing in VAEs using \boldblue{natural images} from the \boldblue{Salient Object Subtizing Dataset} \citep{zhang2016salient} to train our model. 
+\innerblock{}{We explore the emergence of visual number sense in deep networks trained in an unsupervised setting on \boldblue{natural images} from the \boldblue{Salient Object Subtizing Dataset} \citep{zhang2016salient}. The complexity of natural visual scenes helps capture the abstract nature of number sense.
 % Similair to previous work, we hope to show that (emergence/visual number sesnse).
 }
 }
@@ -315,18 +320,21 @@ When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogn
 \column{0.45}
 \block{VARIATIONAL AUTOENCODER}{
 \colorlet{innerblockbodybgcolor}{white}
-\innerblock{}{\boldblue{VAEs} learn to map data samples $X$ to a posterior distribution \mbox{$Q(z \mid X)$} rather than a deterministic latent representation as used in conventional autoencoders. Inputs can be reconstructed by sampling latent vector $z$ from the posterior distribution and passing it through a decoder network. To make sampling feasible, the posterior distribution is parametrized by a Gaussian distribution with its mean and variance predicted by the encoder.}
+% Too long probably, maybe reduce to a figure
+\innerblock{}{\boldblue{VAEs} are a generative algorithm that can be trained in a unsupervised manner. Instead of mapping data samples $X$ to a deterministic latent representation as in conventional autoencoders, VAES learn to a posterior distribution \mbox{$Q(z \mid X)$}. Inputs can be reconstructed by sampling latent vector $z$ from the posterior distribution and passing it through a decoder network. We parameterize the encoder and decoder network with deep CNNs, enabling training by stochastic gradient descent. }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 
-\innerblock{}{Together, the VAE's objective function is the summation of a reconstruction term (negative log-likelihood of the data) and the KL regularization:
+\innerblock{}{
+The VAE's objective function is the summation of a reconstruction term and a KL regularization:
 %
 \begin{align}
   %\log P(X) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z \mid X)] = E[\log P(X \mid z) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]]
   \mathcal{L}_{VAE} = E[\log P(X \mid z)] - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]
 \end{align}}
 
-\colorlet{innerblockbodybgcolor}{white}
-\innerblock{}{\blindlist{itemize}[1]}
+\colorlet{innerblockbodybgcolor}{white} 
+% move CNN stuff upwards?
+\innerblock{}{To make sampling feasible posterior distribution \mbox{$Q(z | X)$} is (Guassian stuff). P(z) is often implemented as...) }
 }
 \end{columns}
 
@@ -382,7 +390,7 @@ When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogn
 %% \setlength\columnseprule{0.0cm}
 \begin{multicols}{2}
 {\boldblue{Feature Perceptual Loss.} In our experiments we observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent feature perceptual loss which uses intermediate layer representations in the objective function of the autoencoder.\par}
-{A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds. Subsequently, we apply random image transforms to each object to increase diversity in appearance. }
+{A mixture of natural images and \boldblue{synthetic data} was used to augment the SOS dataset. Images are synthesized by cut-pasting objects onto natural image backgrounds with various random image transformations applied. Although unrealistic looking, ... }
 %% \vskip 0.11em
 \end{multicols}
 }
