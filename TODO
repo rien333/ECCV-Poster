@@ -77,6 +77,7 @@
 
 # Contents
 
+- [ ] Maybe make everything more bulletpoint like?
 - [ ] u forgot the whole emergence zozori stuff
   - mention in the subitizing thing? (or is this double with the into)
   - read back the original paper for a formulation
@@ -115,3 +116,4 @@
              (and then the reconstruction term sort measures how well these 
              parameters do according to some kind of similarity measure (but 
              this is only for the updates?))
+- [ ] Table have a caption sorta explaining how to read it

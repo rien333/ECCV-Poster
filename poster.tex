@@ -133,7 +133,7 @@
 
 % Redefine block title stuff
 \usepackage{xpatch}
-\xpatchcmd{\block}{\bf\LARGE\color{blocktitlefgcolor}}{\bfseries\Huge\color{eccvblue}}{}{}
+\xpatchcmd{\block}{\bf\LARGE\color{blocktitlefgcolor}}{\bfseries\huge\color{eccvblue}}{}{}
 \xpatchcmd{\innerblock}{\bf \color{innerblocktitlefgcolor}}{\bfseries\color{eccvblue}}{}{}
 % remove space that empty innerblock title leaves behind
 \makeatletter
@@ -142,7 +142,7 @@
 
 %% redo font stuff here I guess
 %% Inner body text style
-\xpatchcmd{\block}{#3}{\fontsize{35}{42}#3}{}{}
+\xpatchcmd{\block}{#3}{\fontsize{30}{36}#3}{}{}
 
 \definecolor{eccvlightblue}{HTML}{009EE0}
 % more gray blue ish but makes a good background color
@@ -201,11 +201,11 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 
 % Make the title layout horizontal instead of vertical, as in Tom's Example?
 % that way you can squeeze more information in
-\title{\Longstack[l]{{SUBITIZING WITH} {VARIATIONAL AUTOENCODERS}}}
+\title{SUBITIZING WITH VARIATIONAL AUTOENCODERS}
 \author{Rijnder Wever, Tom Runia}
 \date{\today}
 \institute{University of Amsterdam}
-\titlegraphic{\includegraphics[width=6.0cm]{UVA-plain}}
+\titlegraphic{\includegraphics[width=3.6cm]{UVA-plain}}
 
 % 🐝🐝🐝🐝🐝 Do something with alternating lightblue and white backgrounds
 % But with black text
@@ -218,24 +218,31 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 \usetitlestyle{simpletitle}
 
 \settitle{
-    \begin{multicols}{2}
-    \setstackgap{L}{1em}
-    \vspace*{-1\topskip plus 1fill}
+    %% \begin{multicols}{2}
+    %% \setstackgap{L}{1em}
+    %% \vspace*{-1\topskip plus 1fill}
+  	\noindent\begin{minipage}{0.71\linewidth}
     \vbox{
-      \color{titlefgcolor} {\bfseries \Huge \fontsize{120}{144}\selectfont \@title \par}
+      \color{titlefgcolor} {\bfseries \fontsize{80}{96} \selectfont \@title \par}
       \vspace*{1.0em}
       % The two different colors in the title are really not that nice
-      \color{titlefgcolor} {\Huge \@author}}
-    \vspace*{\fill}
-    \columnbreak
-    
-    \setstackgap{L}{2.5em}
-    \begin{flushright}
-      \Longstack{
-        {\@titlegraphic} 
-        {\Huge \color{black}\@institute}}
-    \end{flushright}
-    \end{multicols}
+      \color{titlefgcolor} {\huge \@author}}
+    %% \vspace*{\fill}
+    %% \columnbreak
+    \end{minipage}
+    \hfill%
+    \begin{minipage}{0.29\linewidth}
+      \vspace*{-10pt}
+      \noindent\begin{minipage}{0.6\textwidth}\raggedleft
+        \@titlegraphic
+      \end{minipage}
+      \hfill%
+      \begin{minipage}{0.4\textwidth}\raggedleft
+        \huge \color{black}University of\\\vspace{-5mm}Amsterdam
+      \end{minipage}
+    \end{minipage}
+
+    %% \end{multicols}
 }
 
 
@@ -260,7 +267,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
   %% \innerblock[bodyinnersep=40pt]{}{
   \begin{center}
     \begin{minipage}{1.0\linewidth}
-      {\LARGE
+      {\Large
       % nog niet erg smooth
       % ook te lang (misschien kan de 1e zin weg of anders)
       % 	- Als je de 1e zin weghaalt kun je misschien bij de laatste zin
@@ -314,7 +321,8 @@ When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogn
 % in humans 
 % 	- whait is "emergent" even coined in the paper 
 %   	- spontaneous, etc.
-\innerblock{}{We explore the emergence of visual number sense in deep networks trained in an unsupervised setting on \boldblue{natural images} from the \boldblue{Salient Object Subitizing Dataset} \citep{zhang2016salient}. The complexity of natural visual scenes helps capture the abstract nature of number sense.
+% idk remove last sentence?
+\innerblock{}{We explore the emergence of visual number sense in deep networks trained in an unsupervised setting on \boldblue{natural images} from the \boldblue{Salient Object Subitizing Dataset} \citep{zhang2016salient}. The complexity of natural visual scenes helps capture the abstract nature of number sense. 
 % Similair to previous work, we hope to show that (emergence/visual number sesnse).
 }
 }
@@ -345,7 +353,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 %% \begin{columns}
 %% \column{0.5}
 \useblockstyle{eccv2optimizations}
-\block{OPTIMIZATIONS}{
+\block{OPTIMIZATION RESULTS}{
 %% \begin{minipage}[t]{0.4\linewidth}
 
 \useinnerblockstyle{eccvinneroptimizations}
@@ -369,17 +377,23 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
     \centering
     \begin{tikzfigure}
       \vspace*{-10pt}
-      \includegraphics[width=0.8\linewidth]{bce_dfc_crop}
+      \includegraphics[width=0.95\linewidth]{bce_dfc_crop}
     \end{tikzfigure}
   \end{minipage}\hfill
   \begin{minipage}{0.494\linewidth}
     \centering
     %% \hspace*{45pt}
     \begin{tikzfigure}
-      \hspace*{15pt}\includegraphics[width=0.23\linewidth]{syn1}
-      \includegraphics[width=0.23\linewidth]{syn2}
-      \includegraphics[width=0.23\linewidth]{syn3}
-      \includegraphics[width=0.23\linewidth]{syn4}
+      \hspace*{15pt}\includegraphics[width=0.22\linewidth]{syn1}
+      \includegraphics[width=0.22\linewidth]{syn2}
+      \includegraphics[width=0.22\linewidth]{syn3}
+      \includegraphics[width=0.22\linewidth]{syn4}\\
+      %% \bigskip
+      \vspace*{4pt}
+      \hspace*{15pt}\includegraphics[width=0.22\linewidth]{syn1b}
+      \includegraphics[width=0.22\linewidth]{syn2b}
+      \includegraphics[width=0.22\linewidth]{syn3b}
+      \includegraphics[width=0.22\linewidth]{syn4b}
     \end{tikzfigure}%
  \end{minipage}%
   
