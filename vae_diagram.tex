@@ -4,16 +4,22 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes.geometric}
-\usetikzlibrary{arrows}
-%% \usetikzlibrary{arrows.meta}
+%% \usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+%% \tikzset{%
+%%   strongT/.tip={Triangle},/.style={line width=12mm}
+%% }
 
 \begin{document}
+
+\tikzset{every picture/.style={line width=1pt}}
 
 %% \begin{figure}[p] % remove when finished
 \hspace*{-80pt}\begin{tikzpicture}[
 networknode/.style={regular polygon,regular polygon sides=4, draw=black, fill=none, very thick, inner sep=-7pt},
 vectornode/.style={rectangle, draw=black, fill=none, semithick},
 imagenode/.style={rectangle, draw=none, fill=none},
+>={Triangle[width=2.2mm,length=2.0mm]},->
 ]
 
 %Nodes
@@ -30,14 +36,16 @@ imagenode/.style={rectangle, draw=none, fill=none},
      [label=above:{\textit{Transposed Convolutions}}]{\textbf{Decoder Network}};
 \node[imagenode] (output) [right=of decoder][label=below:$\widetilde{X}$] {\includegraphics[width=0.1\textwidth]{syn1}};
 
+
 %Lines
-\draw[-triangle] (input.east) -- (encoder.west);
+%% \draw[-strongT, line width=0.35mm] (input.east) -- (encoder.west);
+\draw[->] (input.east) -- (encoder.west);
 %% \draw (encoder.south) node[label=below:$b_1$,draw]{}
-\draw[-{Latex[length=2mm,width=2mm]}] (encoder.east) -- (std.west);
-\draw[-{Latex[length=2mm,width=2mm]}] (encoder.east) -- (mean.west);
-\draw[-{Latex[length=2mm,width=2mm]}] (mean.east) -- (decoder.west);
-\draw[-{Latex[length=2mm,width=2mm]}] (std.east) -- (decoder.west);
-\draw[-{Latex[length=2mm,width=2mm]}] (decoder.east) -- (output.west);
+\draw[->] (encoder.east) -- (std.west);
+\draw[->] (encoder.east) -- (mean.west);
+\draw[->] (mean.east) -- (decoder.west);
+\draw[->] (std.east) -- (decoder.west);
+\draw[->] (decoder.east) -- (output.west);
 %% \draw[->] (decoder.west) .. controls +(down:7mm) and +(right:7mm) .. (lowercircle.east);
 %% \draw[->] (decoder.west) 
 
