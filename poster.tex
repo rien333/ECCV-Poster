@@ -13,6 +13,7 @@
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage{float}
+\usepackage{babel} % something with hyphens? works okay
 
 % Table packages
 \usepackage{booktabs}
@@ -187,7 +188,7 @@
 
 \definetitlestyle{simpletitle}{
 width=807mm, roundedcorners=0, linewidth=0pt, innersep=0pt,
-titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
+titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 \begin{scope}[line width=\titlelinewidth, rounded corners=\titleroundedcorners]
 \draw[color=white, fill=titlebgcolor] % notice the white hack
 (\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);
@@ -206,13 +207,6 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
 \date{\today}
 \institute{University of Amsterdam}
 \titlegraphic{\includegraphics[width=3.6cm]{UVA-plain}}
-
-% 🐝🐝🐝🐝🐝 Do something with alternating lightblue and white backgrounds
-% But with black text
-% Maybe put other info, such as titling info on a blue background as well
-% maybe you can do this with subblocks?
-
-% also figure out why the titleless block behaves weird (maybe redefine such (image?) blocks locaally however)
 
 \usecolorstyle[colorOne=white,colorTwo=black,colorThree=eccvblue]{eccvblue}
 \usetitlestyle{simpletitle}
@@ -272,16 +266,14 @@ titletotopverticalspace=40pt, titletoblockverticalspace=20pt}{
       % ook te lang (misschien kan de 1e zin weg of anders)
       % 	- Als je de 1e zin weghaalt kun je misschien bij de laatste zin
       % 	  iets doen als "Provided that..."
-        Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an unsupervised generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we employ a hierarchically organized convolutional variational autoencoder (VAE) tasked with encoding and reconstructing training images. Provided that numerosity is a key characteristic in the images, the network will learn to encode visual numerosity in the latent representation.\par} % \par changes a lot
+        Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an \boldblue{unsupervised} generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we employ a hierarchically organized \boldblue{convolutional variational autoencoder} (VAE) tasked with encoding and reconstructing training images. Provided that numerosity is a key characteristic in the images, the network will learn to encode visual numerosity in the latent representation.\par} % \par changes a lot
       \end{minipage}
   \end{center}
+\vspace*{10pt} % not sure why this is needed
 }}
 % Horitzontal rule that looks only sorta okay and takes up space
 %%   \vspace*{10pt}
 %%  \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.75\paperwidth}{0.12cm}}}}
-
-\vspace*{-30pt} % not sure why this is needed
-
 
 
 \begin{columns}
@@ -377,23 +369,23 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
     \centering
     \begin{tikzfigure}
       \vspace*{-10pt}
-      \includegraphics[width=0.95\linewidth]{bce_dfc_crop}
+      \hspace*{-10pt}\includegraphics[width=0.95\linewidth]{bce_dfc_crop}
     \end{tikzfigure}
   \end{minipage}\hfill
   \begin{minipage}{0.494\linewidth}
     \centering
     %% \hspace*{45pt}
     \begin{tikzfigure}
-      \hspace*{15pt}\includegraphics[width=0.22\linewidth]{syn1}
-      \includegraphics[width=0.22\linewidth]{syn2}
-      \includegraphics[width=0.22\linewidth]{syn3}
-      \includegraphics[width=0.22\linewidth]{syn4}\\
+      \hspace*{15pt}\includegraphics[width=0.22\linewidth]{syn1}\hspace{3pt}%
+      \includegraphics[width=0.22\linewidth]{syn2}\hspace{3pt}%
+      \includegraphics[width=0.22\linewidth]{syn3}\hspace{3pt}%
+      \includegraphics[width=0.22\linewidth]{syn4}\\%
       %% \bigskip
-      \vspace*{4pt}
-      \hspace*{15pt}\includegraphics[width=0.22\linewidth]{syn1b}
-      \includegraphics[width=0.22\linewidth]{syn2b}
-      \includegraphics[width=0.22\linewidth]{syn3b}
-      \includegraphics[width=0.22\linewidth]{syn4b}
+      \vspace*{3pt}
+      \hspace*{15pt}\includegraphics[width=0.22\linewidth]{syn1b}\hspace{3pt}%
+      \includegraphics[width=0.22\linewidth]{syn2b}\hspace{3pt}%
+      \includegraphics[width=0.22\linewidth]{syn3b}\hspace{3pt}%
+      \includegraphics[width=0.22\linewidth]{syn4b}%
     \end{tikzfigure}%
  \end{minipage}%
   
@@ -408,7 +400,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 %% \setlength\columnseprule{0.0cm}
 \begin{multicols}{2}
 {We observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent \boldblue{Feature Perceptual Loss} \citep{hou2017deep} which uses intermediate layer representations from a pretrained network in the objective function of the autoencoder.\par}
-{Augmentation of the SOS dataset with \boldblue{synthetic data} was required to familiarize the model with an extensive distribution of object types and the spatial configurations thereof. Images are synthesized by cut-pasting objects onto natural image backgrounds with various random image transformations applied.  }
+{Augmentation of the SOS dataset with \boldblue{synthetic data} was required to familiarize the model with an extensive distribution of object types and the spatial configurations thereof. Images are synthesized by cut-pasting objects onto natural image backgrounds with various random image transformations applied.}
 %% \vskip 0.11em
 \end{multicols}
 }
