@@ -75,6 +75,7 @@
 - [x] The title and intro don't line up with the blocks
   - they seem to do now but check on ur macbook
 - [ ] nice vdots
+- [ ] syntethic images are vertically off
 
 # Contents
 
@@ -123,3 +124,6 @@
   - make it first, explain it later?
   - Is the objective function important enough?
 - [ ] Have references under subitizing results as a block so there's space for a bird picture
+- [ ] Maybe do neuroscience stuff in the subitizing thingy (if u have text make sure to inlude an other figure at the other side of the block)
+  - uhm idk brain organization? graphs from harvey?
+- [ ] note the lack of reparameterization trick somewhere?
