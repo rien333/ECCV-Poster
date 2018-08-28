@@ -22,7 +22,7 @@
 %% \begin{figure}[p] % remove when finished
 \hspace*{-80pt}\begin{tikzpicture}[
 networknode/.style={regular polygon,regular polygon sides=4, draw=black, fill=none, ultra thick, inner sep=-7pt},
-vectornode/.style={rectangle, draw=black, fill=none, thin},
+vectornode/.style={rectangle, draw=black, fill=none, },
 internode/.style={rectangle, draw=black, fill=none, thick},
 imagenode/.style={rectangle, draw=none, fill=none},
 >={Triangle[width=2.2mm,length=2.0mm]},->
@@ -40,7 +40,7 @@ imagenode/.style={rectangle, draw=none, fill=none},
 \node[internode] (mean) [below=of dummy] {$\mu(X)$};
 \node[internode] (std) [above=of dummy] {$\Sigma(X)$};
 \node[vectornode] (latent) [right=1.5cm of dummy] {\Vectorstack{{z_1} {\vcdots} {z_n}}};
-\node[networknode] (decoder) [right=1.5cm of latent][label=below:{\mbox{$P(X|z)$}}]
+\node[networknode] (decoder) [right=1.08cm of latent][label=below:{\mbox{$P(X|z)$}}]
      [label=above:{\textit{Transposed Convolutions}}]{\textbf{Decoder Network}};
 \node[imagenode] (output) [right=of decoder][label=below:$\widetilde{X}$] {\includegraphics[width=0.1\textwidth]{syn1}};
 
