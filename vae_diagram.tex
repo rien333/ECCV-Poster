@@ -1,14 +1,19 @@
 \documentclass{minimal}
 
 \usepackage{graphicx}
+\usepackage{stackengine}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes.geometric}
+\usetikzlibrary{calc}
 %% \usetikzlibrary{arrows}
 \usetikzlibrary{arrows.meta}
 %% \tikzset{%
 %%   strongT/.tip={Triangle},/.style={line width=12mm}
 %% }
+\newcommand\vcdots{\;\stackMath\stackinset{c}{0pt}{c}{0.6ex}{\vdots}{\vphantom{-}}\;}
+%% \setstackgap{S}{inter-item stackgap}
+%% \setstackgap{L}{1.2em}
 
 \begin{document}
 
@@ -30,9 +35,11 @@ imagenode/.style={rectangle, draw=none, fill=none},
 \node[imagenode] (input) [] [label=below:{$X$}]{\includegraphics[width=0.1\textwidth]{syn1}};
 \node[networknode] (encoder) [right=of input][label=below:{\mbox{$Q(z|X)$}}]
      [label=above:{\textit{Convolutions}}]{\textbf{Encoder Network}};
-\node[vectornode] (std) [right=of encoder] {$\Sigma(X)$};
-\node[vectornode] (mean) [below=of std] {$\mu(X)$};
-\node[networknode] (decoder) [right=of mean][label=below:{\mbox{$P(X|z)$}}] 
+\node[right=1.5cm of encoder] (dummy) {}; 
+\node[vectornode] (mean) [below=of dummy] {$\mu(X)$};
+\node[vectornode] (std) [above=of dummy] {$\Sigma(X)$};
+\node[vectornode] (latent) [right=1.5cm of dummy] {\Vectorstack{{z_1} {\vcdots} {z_n}}};
+\node[networknode] (decoder) [right=1.5cm of latent][label=below:{\mbox{$P(X|z)$}}]
      [label=above:{\textit{Transposed Convolutions}}]{\textbf{Decoder Network}};
 \node[imagenode] (output) [right=of decoder][label=below:$\widetilde{X}$] {\includegraphics[width=0.1\textwidth]{syn1}};
 
@@ -41,10 +48,11 @@ imagenode/.style={rectangle, draw=none, fill=none},
 %% \draw[-strongT, line width=0.35mm] (input.east) -- (encoder.west);
 \draw[->] (input.east) -- (encoder.west);
 %% \draw (encoder.south) node[label=below:$b_1$,draw]{}
-\draw[->] (encoder.east) -- (std.west);
-\draw[->] (encoder.east) -- (mean.west);
-\draw[->] (mean.east) -- (decoder.west);
-\draw[->] (std.east) -- (decoder.west);
+\draw[->] (encoder.east) |- ++(.5,0.3) -- ++(0, 1) |- (std.west);
+\draw[->] (encoder.east) |- ++(.5,-0.3) -- ++(0, -1) |- (mean.west);
+\draw[->] (mean.east) |- ++(.5,-0.0) -- ++(0, 0.0) |- ($(latent.west)+(0, -0.3)$);
+\draw[->] (std.east) |- ++(.5,-0.0) -- ++(0, -0.0) |- ($(latent.west)+(0, 0.3)$);
+\draw[->] (latent.east) -- (decoder.west);
 \draw[->] (decoder.east) -- (output.west);
 %% \draw[->] (decoder.west) .. controls +(down:7mm) and +(right:7mm) .. (lowercircle.east);
 %% \draw[->] (decoder.west) 
