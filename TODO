@@ -74,6 +74,7 @@
   - or make the column sep longer?
 - [x] The title and intro don't line up with the blocks
   - they seem to do now but check on ur macbook
+- [ ] syntethic images are vertically off
 
 # Contents
 
@@ -117,3 +118,6 @@
              parameters do according to some kind of similarity measure (but 
              this is only for the updates?))
 - [ ] Table have a caption sorta explaining how to read it
+- [ ] Maybe do neuroscience stuff in the subitizing thingy (if u have text make sure to inlude an other figure at the other side of the block)
+  - uhm idk brain organization? graphs from harvey?
+- [ ] note the lack of reparameterization trick somewhere?
