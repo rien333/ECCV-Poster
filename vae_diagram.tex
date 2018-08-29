@@ -19,17 +19,21 @@
 %% \setstackgap{S}{inter-item stackgap}
 %% \setstackgap{L}{1.2em}
 
+\definecolor{eccvblue}{HTML}{045494}
+\newcommand\boldblue[1]{\textcolor{eccvlightblue}{\textbf{#1}}}
+
 \begin{document}
 
 \tikzset{every picture/.style={line width=0.9pt}}
 
 %% \begin{figure}[p] % remove when finished
 \begin{tikzpicture}[
-networknode/.style={regular polygon,regular polygon sides=4, draw=black, fill=none, line width=0.8mm, inner sep=-60pt},
-vectornode/.style={rectangle, draw=black, fill=none, },
-internode/.style={rectangle, draw=black, fill=none, thick},
+draw=eccvsuperlightblue,
+networknode/.style={regular polygon,regular polygon sides=4, draw=eccvlightblue, fill=none, line width=0.8mm, inner sep=-60pt},
+vectornode/.style={rectangle, draw=eccvsuperlightblue, fill=none, },
+internode/.style={rectangle, draw=eccvsuperlightblue, fill=none, thick},
 imagenode/.style={rectangle, draw=none, fill=none},
->={Triangle[width=4mm,length=2.9mm]},->
+>={Triangle[width=4mm,length=2.9mm, fill=eccvsuperlightblue]},->
 ]
 
 %Nodes
@@ -39,14 +43,14 @@ imagenode/.style={rectangle, draw=none, fill=none},
 % http://bjlkeng.github.io/images/variational_autoencoder2.png
 \node[imagenode] (input) [] [label=below:{$X$}]{\includegraphics[width=0.052\textwidth]{in.png}};
 \node[networknode] (encoder) [right=of input][text width=10.1cm, align=center, label=below:{\mbox{$Q(z|X)$}}][label=above:{convolutions}]
-     {\textbf{Encoder Network}};
+     {\boldblue{Encoder Network}};
 \node[right=3.0cm of encoder] (dummy) {}; 
 \node[internode] (mean) [below=1.4of dummy] {$\mu(X)$};
 \node[internode] (std) [above=1.4of dummy] {$\Sigma(X)$};
 \setstackgap{L}{0.9em}
 \node[vectornode] (latent) [right=3.0cm of dummy] {\Vectorstack{{z_1} \textbf{.} \textbf{.} \textbf{.}  {z_n}}};
 %% \node[vectornode] (latent) [right=3.0cm of dummy] {\Vectorstack{{z_1} {\large; \vdots}  {z_n}}};
-\node[networknode] (decoder) [right=2.0cm of latent][text width=10.1cm, align=center, label=below:{\mbox{$P(X|z)$}}][label=above:{transposed convolutions}]{\textbf{Decoder Network}};
+\node[networknode] (decoder) [right=2.0cm of latent][text width=10.1cm, align=center, label=below:{\mbox{$P(X|z)$}}][label=above:{transposed convolutions}]{\boldblue{Decoder Network}};
 \node[imagenode] (output) [right=of decoder][label=below:$\widetilde{X}$] {\includegraphics[width=0.052\textwidth]{out.png}};
 
 %Lines

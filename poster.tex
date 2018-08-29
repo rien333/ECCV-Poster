@@ -37,11 +37,16 @@
 \usepackage{sfmath}
 
 % Bibliography
+%% \usepackage[ backend=biber, sorting=none, maxcitenames=2, natbib]{biblatex}
+%% \addbibresource{poster.bib}
 \usepackage[square,numbers, sort&compress]{natbib}
-\bibliographystyle{unsrtnat}
+\bibliographystyle{short2}
+%% \bibliographystyle{unsrtnat}
+%% \bibliographystyle{agsm}
 % this only redefines the citations in text
-%% \renewcommand{\citenumfont}[1]{\textbf{#1}}
 \renewcommand{\bibnumfmt}[1]{\textbf{[#1]} \,}
+% remove "References" heading in natbib
+\renewcommand{\bibsection}{}
 
 \usepackage[]{fontspec}
 \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
@@ -50,9 +55,6 @@
 %% \usepackage[T1]{fontenc}
 %% this scaling feature is pretty handy
 %% \usepackage[default,scale=0.79]{opensans}
-
-% remove "References" heading in natbib
-\renewcommand{\bibsection}{}
 
 %% \renewenvironment{tikzfigure}[1][]{
 %%   \begin{center}
@@ -452,7 +454,7 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
   % Reference here?
 \vspace*{-20pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.37\textwidth]{bird_varied_crop}
+  \includegraphics[width=0.42\textwidth]{bird_varied_crop}
 \end{tikzfigure}
 
 }
@@ -493,7 +495,8 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
 \useblockstyle{reference}
 % not sure if this actually centers text but it is more centered I guess
  %% screws with the centering
-\renewcommand*{\bibfont}{\small}
+%% \renewcommand*{\bibfont}{\small}
+
 \block[bodyinnersep=5pt, bodyoffsetx=19pt]{}{
 %% \vspace*{15pt}
 \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.35\paperwidth}{0.12cm}}}
@@ -502,7 +505,10 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
   %% \begin{center}
     %% \begin{minipage}{0.94\linewidth}
     % maybe print as /small text
-    {\bibliography{poster}}
+    {
+      \bibliography{poster}
+      %% \printbibliography[heading=none]
+    }
     %% \end{minipage}
   %% \end{center}
 }
