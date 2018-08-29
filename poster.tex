@@ -297,7 +297,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
       % ook te lang (misschien kan de 1e zin weg of anders)
       % 	- Als je de 1e zin weghaalt kun je misschien bij de laatste zin
       % 	  iets doen als "Provided that..."
-        Numerosity, the number of objects in a set, is a basic property of a given visual scene. Inspired by \citet{stoianov2012} we propose an \boldblue{unsupervised} generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we employ a hierarchically organized \boldblue{convolutional variational autoencoder} (VAE) tasked with encoding and reconstructing training images. Provided that numerosity is a key characteristic in the images, the network will learn to encode visual numerosity in the latent representation.\par} % \par changes a lot
+        Numerosity, the number of objects in a set, is a basic property of visual scenes. Inspired by \citet{stoianov2012} we propose an \boldblue{unsupervised} generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we employ a hierarchically organized \boldblue{convolutional variational autoencoder} (VAE) tasked with encoding and reconstructing training images. Provided that numerosity is a key characteristic in the images, the network will learn to encode visual numerosity in the latent representation.\par} % \par changes a lot
       \end{minipage}
   \end{center}
 \vspace*{10pt} % not sure why this is needed
@@ -308,44 +308,45 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 
 
 \begin{columns}
-\column{0.53}
+\column{0.54}
 
 \block{CONTRIBUTIONS}{
 
 \colorlet{innerblockbodybgcolor}{white}
-\innerblock[bodyinnersep=25pt, bodyverticalshift=-10pt]{}{
-  \begin{itemize}[leftmargin=*]
+\innerblock[bodyinnersep=25pt, bodyverticalshift=-00pt]{}{
+  \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
   \item Visual numerosity in the subitizing range emerges as a statistical property of natural images in VAEs.
- \end{itemize}
-  \vspace*{-25pt}
-}
-\colorlet{innerblockbodybgcolor}{eccvgrayblue}
-\innerblock[bodyverticalshift=-10pt]{}{
-  \begin{itemize}[leftmargin=*]
-  \item  Numerosity and object area are represented seperately, similair to biological neuronal networks.
-\end{itemize}
-  \vspace*{-25pt}
-}
-\colorlet{innerblockbodybgcolor}{white}
-\innerblock[bodyverticalshift=-10pt]{}{
-  \begin{itemize}[leftmargin=*]
+%%  \end{itemize}
+%%   \vspace*{-25pt}
+%% }
+%% \colorlet{innerblockbodybgcolor}{eccvgrayblue}
+%% \innerblock[bodyverticalshift=-10pt]{}{
+%%   \begin{itemize}[leftmargin=*]
+  \item  Numerosity and object area are represented seperately, similair to biological neural networks.
+%% \end{itemize}
+%%   \vspace*{-25pt}
+%% }
+%% \colorlet{innerblockbodybgcolor}{white}
+%% \innerblock[bodyverticalshift=-10pt]{}{
+%%   \begin{itemize}[leftmargin=*]
   \item A loss function aimed at contour reconstruction improves the network's subitizing performance.
+%%   \end{itemize}
+%%   \vspace*{-25pt}
+%% }
+%% \colorlet{innerblockbodybgcolor}{eccvgrayblue}
+%% \innerblock[bodyverticalshift=-10pt]{}{
+%%   \begin{itemize}[leftmargin=*]
+  %% \item Our unsupervised method performs comparably to supervised algorithms on a subitizing task.
+  \item Numerisoty information represented in the latent space is succesfully extrapolated to a subitizing task.
   \end{itemize}
-  \vspace*{-25pt}
-}
-\colorlet{innerblockbodybgcolor}{eccvgrayblue}
-\innerblock[bodyverticalshift=-10pt]{}{
-  \begin{itemize}[leftmargin=*]
-  \item Our unsupervised method performs comparably to non-machine learning algorithms trained in a supervised setting on a subitizing task.
-  \end{itemize}
-  \vspace*{-25pt}
+  %% \vspace*{-25pt}
 }
 %% \end{itemize}
 }
 
 \block{VARIATIONAL AUTOENCODER}{
 \colorlet{innerblockbodybgcolor}{white}
-\innerblock[]{}{\vspace*{-20pt}\hspace*{-28pt}\includestandalone{vae_diagram}
+\innerblock[bodyoffsetx=-40pt]{}{\vspace*{-20pt}\hspace*{-30pt}\includestandalone{vae_diagram}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
@@ -360,7 +361,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 }
 
 
-\column{0.47}
+\column{0.46}
 
 \block{SUBITIZING}{
 \colorlet{innerblockbodybgcolor}{white}
@@ -385,7 +386,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 % More point like?
 % the subitizing range modulates the cognitive mechanisms directed at instance counting
-\innerblock{}{\boldblue{Subitizing} is a perceptual ability that enables near-instantaneous and spontaneous identification of the numerosity of small visual sets. When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cognitive mechanisms related to instance counting are employed. We explore the emergence of visual number sense in unsupervised deep networks trained on \boldblue{natural images} from the \boldblue{Salient Object Subitizing Dataset} \citep{zhang2016salient}. 
+\innerblock{}{\boldblue{Subitizing} is a perceptual ability that enables rapid and spontaneous identification of the numerosity of small visual sets. When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cognitive mechanisms related to instance counting are employed. We explore the emergence of visual number sense in unsupervised deep networks trained on \boldblue{natural images} from the \boldblue{Salient Object Subitizing Dataset} \citep{zhang2016salient}. 
 % The complexity of natural visual scenes helps capture the abstract nature of number sense.
 }
 }
@@ -395,7 +396,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \innerblock{}{
 Harvey2013topographic Neuroscience Neuroscience Harvey?
 Also check out nieder2016 for figures mayeb?
-the one paper (pre-Nieder) with "integral part of the visual world" maybe has figures as well
+the one paper (pre-Nieder) with "integral part of the visual world" maybe has figures as well. Reflection of the visiospatial systems... (see paper?)
 }
 }
 
@@ -479,8 +480,8 @@ the one paper (pre-Nieder) with "integral part of the visual world" maybe has fi
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
     \vspace*{-12pt}
-    \includegraphics[width=0.43\linewidth]{NN}
-    \includegraphics[width=0.43\linewidth]{NA}
+    \includegraphics[width=0.45\linewidth]{NN}
+    \includegraphics[width=0.45\linewidth]{NA}
   \end{tikzfigure}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
@@ -492,7 +493,7 @@ the one paper (pre-Nieder) with "integral part of the visual world" maybe has fi
   % Reference here?
 \vspace*{-20pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.44\textwidth]{bird_varied_crop}
+  \includegraphics[width=0.45\textwidth]{bird_varied_crop}
 \end{tikzfigure}
 
 }
