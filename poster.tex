@@ -2,20 +2,28 @@
 %% innermargin: The margin from the edge of the poster edge to the outermost edge of the blocks; i.e. content margin
 %% colspace (horitzontal collumn space?) needs to be high before it's noticable
 % innermargin was 40pt, idk what's printable
-\documentclass[25pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=45pt, blockverticalspace=45pt]{tikzposter}
+\documentclass[25pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=40pt, blockverticalspace=45pt]{tikzposter}
 
 % disable hypnetation
 \usepackage[none]{hyphenat} % behaves kinda odd, requires multiple compiles?
 
-% dummy text generation
+
 \usepackage{blindtext}
 \usepackage{xcolor}
 \usepackage{multicol}
 \usepackage{fix-cm}
 \usepackage{stackengine}
-\usepackage{graphicx}
 \usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+
+% figures
+\usepackage{graphicx}
 \usepackage{float}
+\usepackage{caption}
+\DeclareCaptionFormat{postersize}{\fontsize{30}{36}\selectfont#1#2#3}
+\captionsetup{format=postersize}
+\usepackage{tabularx}
+
 
 % tikz
 \usepackage{standalone}
@@ -34,13 +42,16 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 %% sans serif math font
-\usepackage{sfmath}
+\usepackage[cmbright]{sfmath}
+%% \usepackage[EULERGREEK]{sansmath}
+%% \sansmath
+
 
 % Bibliography
 %% \usepackage[ backend=biber, sorting=none, maxcitenames=2, natbib]{biblatex}
 %% \addbibresource{poster.bib}
 \usepackage[square,numbers, sort&compress]{natbib}
-\bibliographystyle{short2}
+\bibliographystyle{short}
 %% \bibliographystyle{unsrtnat}
 %% \bibliographystyle{agsm}
 % this only redefines the citations in text
@@ -65,6 +76,8 @@
 %%   \hspace{0pt}
 %%   \end{center}
 %% }
+
+%% \meaning\tikzfigure
 
 % based on "Minimal" blockstyle
 % body ofsett 1 is nice bc of the titleless innerblock "glitch"
@@ -105,7 +118,7 @@
       % seperator line
       \path (blockbody.south) 
       % sorta add these corrdinates/values to the start
-      +(0.0cm,9cm) coordinate (c1);
+      +(0.0cm,7cm) coordinate (c1);
       \path (blockbody.north)
       +(0.0cm, -1cm) coordinate (c2);
       %% \draw [line width=0.42cm,eccvgrayblue, dashed, dash pattern=on 20pt off 20pt] (blockbody.south) -- (blockbody.north);
@@ -160,12 +173,14 @@
 \xpatchcmd{\block}{#3}{\fontsize{30}{36}#3}{}{}
 
 \definecolor{eccvlightblue}{HTML}{009EE0}
+\definecolor{eccvlightblued}{HTML}{6898be}
 % more gray blue ish but makes a good background color
 % combine with background titles in like light blue?
 \definecolor{eccvgrayblue}{HTML}{E2F1F9}
 \definecolor{eccvsuperlightblue}{HTML}{F5F9FF}
 %% \definecolor{eccvgrayblue}{HTML}{D7FFFF}
 \definecolor{eccvblue}{HTML}{045494}
+\definecolor{eccvdarkblue}{HTML}{023258}
 %% \definecolor{lightgrey}{HTML}{777777}
 \definecolor{lightgrey}{HTML}{CCCCCC}
 
@@ -211,6 +226,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 }
 
 \newcommand\boldblue[1]{\textcolor{eccvblue}{\textbf{#1}}}
+\newcommand\markblue[1]{\textcolor{eccvblue}{{#1}}}
 
 
 \tikzposterlatexaffectionproofoff
@@ -292,26 +308,69 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 
 
 \begin{columns}
-\column{0.5}
+\column{0.53}
 
 \block{CONTRIBUTIONS}{
+
 \colorlet{innerblockbodybgcolor}{white}
-\innerblock{}{Instead of the intro just have this? with a list of contribs \blindlist{itemize}[3]}
+\innerblock[bodyinnersep=25pt, bodyverticalshift=-10pt]{}{
+  \begin{itemize}[leftmargin=*]
+  \item Visual numerosity in the subitizing range emerges as a statistical property of natural images in VAEs.
+ \end{itemize}
+  \vspace*{-25pt}
 }
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+\innerblock[bodyverticalshift=-10pt]{}{
+  \begin{itemize}[leftmargin=*]
+  \item  Numerosity and object area are represented seperately, similair to biological neuronal networks.
+\end{itemize}
+  \vspace*{-25pt}
+}
+\colorlet{innerblockbodybgcolor}{white}
+\innerblock[bodyverticalshift=-10pt]{}{
+  \begin{itemize}[leftmargin=*]
+  \item A loss function aimed at contour reconstruction improves the network's subitizing performance.
+  \end{itemize}
+  \vspace*{-25pt}
+}
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+\innerblock[bodyverticalshift=-10pt]{}{
+  \begin{itemize}[leftmargin=*]
+  \item Our unsupervised method performs comparably to non-machine learning algorithms trained in a supervised setting on a subitizing task.
+  \end{itemize}
+  \vspace*{-25pt}
+}
+%% \end{itemize}
+}
+
+\block{VARIATIONAL AUTOENCODER}{
+\colorlet{innerblockbodybgcolor}{white}
+\innerblock[]{}{\vspace*{-20pt}\hspace*{-28pt}\includestandalone{vae_diagram}
+}
+\colorlet{innerblockbodybgcolor}{eccvgrayblue}
+\innerblock{}{
+\boldblue{VAEs} are generative algorithms that perform \boldblue{unsupervised} representation learning. 
+%Unlike the deterministic latent representation used in conventional autoencoders, VAEs map data samples to a posterior distribution $Q$ representing the latent space. 
+The VAE's objective function is the summation of a reconstruction term and a KL regularization:
+%
+\begin{align}
+  %\log P(X) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z \mid X)] = E[\log P(X \mid z) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]]
+  \mathcal{L}_{VAE} = E[\log P(X \mid z)] - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]
+\end{align}}
+}
+
+
+\column{0.47}
 
 \block{SUBITIZING}{
 \colorlet{innerblockbodybgcolor}{white}
 % drop "instances" after the "1-4"?
-\innerblock{}{\boldblue{Subitizing} is a perceptual ability that enables near-instantaneous and spontaneous identification of the numerosity of small visual sets. 
-When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cognitive mechanisms related to instance counting are employed. We explore the emergence of visual number sense in deep networks trained in an unsupervised setting on \boldblue{natural images} from the \boldblue{Salient Object Subitizing Dataset} \citep{zhang2016salient}. 
-% The complexity of natural visual scenes helps capture the abstract nature of number sense.
-}
+
 %% \begin{figure}%
 %% \subfloat{\includegraphics[width=5.15cm,valign=c]{vstack_e}}
 %% \quad
 %% \subfloat{\includegraphics[width=6cm,valign=c]{e4}}
 %% \end{figure}
-\colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
 \begin{tikzfigure}
 %% \includegraphics{vstack_e}
@@ -322,45 +381,22 @@ When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cogn
 \includegraphics[width=0.245\linewidth]{s4r} 
 \end{tikzfigure}
 %% \colorlet{innerblockbodybgcolor}{white}
-}}
-% make sure you mention sorta "what our model" is somwhere(or just rewrite)
-% instead of VAEs: artificial learning, ANN/CNNs, deep learning
-%	- emerges as a statistical property of images (in ANNs trained in an unsupervised manner)
-%	- a latent structure that is important in modeling the visual world
-% make sure the intro mentions something about emergence/visual number sense 
-% in humans 
-% 	- whait is "emergent" even coined in the paper 
-%   	- spontaneous, etc.
-% idk remove last sentence?
-%% \innerblock{}{Lorem ipsum dolor sit amet, placerat integer justo integer commodo, praesent non placerat morbi sed, dolor et vitae ac quisque qui, urna erat.% Similair to previous work, we hope to show that (emergence/visual number sesnse).
-%% }
-
-
-
-
-
-\column{0.5}
-
-\block{VARIATIONAL AUTOENCODER}{
-\colorlet{innerblockbodybgcolor}{white}
-\innerblock[]{}{\vspace*{-20pt}\hspace*{-25pt}\includestandalone{vae_diagram}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
-\innerblock{}{
-\boldblue{VAEs} are generative algorithms that perform \boldblue{unsupervised} representation learning. Instead of mapping data samples $X$ to a deterministic latent representation as in conventional autoencoders, VAEs learn a posterior distribution \mbox{$Q(z \mid X)$}.  %We parameterize the encoder and decoder network with deep CNNs. 
-The VAE's objective function is the summation of a reconstruction term and a KL regularization:
-%
-\begin{align}
-  %\log P(X) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z \mid X)] = E[\log P(X \mid z) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]]
-  \mathcal{L}_{VAE} = E[\log P(X \mid z)] - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]
-\end{align}}
+% More point like?
+% the subitizing range modulates the cognitive mechanisms directed at instance counting
+\innerblock{}{\boldblue{Subitizing} is a perceptual ability that enables near-instantaneous and spontaneous identification of the numerosity of small visual sets. When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cognitive mechanisms related to instance counting are employed. We explore the emergence of visual number sense in unsupervised deep networks trained on \boldblue{natural images} from the \boldblue{Salient Object Subitizing Dataset} \citep{zhang2016salient}. 
+% The complexity of natural visual scenes helps capture the abstract nature of number sense.
+}
 }
 
 \block{BLOCK 2}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
 Harvey2013topographic Neuroscience Neuroscience Harvey?
-Harvey2013topographic maybe move to where the bird figure is now? (cus that's about invarience to and like brain function)}
+Also check out nieder2016 for figures mayeb?
+the one paper (pre-Nieder) with "integral part of the visual world" maybe has figures as well
+}
 }
 
 \end{columns}
@@ -368,7 +404,7 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
 %% \begin{columns}
 %% \column{0.5}
 \useblockstyle{eccv2optimizations}
-\block{OPTIMIZATION RESULTS}{
+\block{VISUAL OPTIMIZATION RESULTS}{
 %% \begin{minipage}[t]{0.4\linewidth}
 
 \useinnerblockstyle{eccvinneroptimizations}
@@ -392,23 +428,24 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
     \centering
     \begin{tikzfigure}
       \vspace*{-10pt}
-      \hspace*{-10pt}\includegraphics[width=0.95\linewidth]{bce_dfc_crop}
+      \hspace*{-10pt}\includegraphics[width=0.9\linewidth]{bce_dfc_crop}
     \end{tikzfigure}
   \end{minipage}\hfill
   \begin{minipage}{0.494\linewidth}
     \centering
     %% \hspace*{45pt}
     \begin{tikzfigure}
-      \hspace*{15pt}\includegraphics[width=0.22\linewidth]{syn1}\hspace{3pt}%
-      \includegraphics[width=0.22\linewidth]{syn2}\hspace{3pt}%
-      \includegraphics[width=0.22\linewidth]{syn3}\hspace{3pt}%
-      \includegraphics[width=0.22\linewidth]{syn4}\\%
+      \vspace*{-10pt}
+      \hspace*{15pt}\includegraphics[width=0.19\linewidth]{syn1}\hspace{3pt}%
+      \includegraphics[width=0.19\linewidth]{syn2}\hspace{3pt}%
+      \includegraphics[width=0.19\linewidth]{syn3}\hspace{3pt}%
+      \includegraphics[width=0.19\linewidth]{syn4}\\%
       %% \bigskip
       \vspace*{3pt}
-      \hspace*{15pt}\includegraphics[width=0.22\linewidth]{syn1b}\hspace{3pt}%
-      \includegraphics[width=0.22\linewidth]{syn2b}\hspace{3pt}%
-      \includegraphics[width=0.22\linewidth]{syn3b}\hspace{3pt}%
-      \includegraphics[width=0.22\linewidth]{syn4b}%
+      \hspace*{15pt}\includegraphics[width=0.19\linewidth]{syn1b}\hspace{3pt}%
+      \includegraphics[width=0.19\linewidth]{syn2b}\hspace{3pt}%
+      \includegraphics[width=0.19\linewidth]{syn3b}\hspace{3pt}%
+      \includegraphics[width=0.19\linewidth]{syn4b}%
     \end{tikzfigure}%
  \end{minipage}%
   
@@ -419,11 +456,12 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
 \innerblock{}{
 \renewcommand{\columnseprulecolor}{\color[HTML]{FFFFFF}}
 \setlength\columnsep{90pt}
-\setlength\columnseprule{0.12cm}
+\setlength\columnseprule{0.14cm}
 %% \setlength\columnseprule{0.0cm}
 \begin{multicols}{2}
-{We observed difficulties with reconstructing multiple salient objects, negatively affecting the ability to subitize. Therefore, we employ the recent \boldblue{Feature Perceptual Loss} \citep{hou2017deep} which uses intermediate layer representations from a pretrained network in the objective function of the autoencoder.\par}
-{Augmentation of the SOS dataset with \boldblue{synthetic data} was required to familiarize the model with an extensive distribution of object types and the spatial configurations thereof. Images are synthesized by cut-pasting objects onto natural image backgrounds with various random image transformations applied.}
+% Could drop the first sentence from this block, and the second of the other
+{Reconstruction of figure-ground organization was improved by employing \boldblue{Feature Perceptual Loss} \citep{hou2017deep} which uses intermediate layer representations from a pretrained network in the objective function of the VAE.\par}
+{Augmentation of the SOS dataset with \boldblue{synthetic data} was required to familiarize the model with an extensive distribution of object types and the spatial configurations thereof.}
 %% \vskip 0.11em
 \end{multicols}
 }
@@ -431,7 +469,7 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
 
 \useblockstyle{eccv2}
 \begin{columns}
-\column{0.57}
+\column{0.53}
 
 
 \block{SIZE-INVARIANT NUMEROSITY DETECTORS}{
@@ -441,8 +479,8 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
     \vspace*{-12pt}
-    \includegraphics[width=0.42\linewidth]{NN}
-    \includegraphics[width=0.42\linewidth]{NA}
+    \includegraphics[width=0.43\linewidth]{NN}
+    \includegraphics[width=0.43\linewidth]{NA}
   \end{tikzfigure}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
@@ -454,26 +492,30 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
   % Reference here?
 \vspace*{-20pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.42\textwidth]{bird_varied_crop}
+  \includegraphics[width=0.44\textwidth]{bird_varied_crop}
 \end{tikzfigure}
 
 }
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
-  Comparable with biological neuronal networks, an analysis of the learned representations revealed that numerosity is represented \boldblue{invariant to cumulative object area}. %
+  Comparable with biological neuronal networks, an analysis of the learned representations revealed that numerosity is represented \boldblue{invariant to cumulative object area}. However, no latent dimension represents just one visual property. %
 % The results were obtained by performing a linear regression over a controlled synthetic dataset aimed at moderating object size  and visual variation in object and background classes. 
 }
 }
 
-\column{0.43}
+\column{0.47}
 
 \block{SUBITIZING TASK PERFORMANCE}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
-\vspace*{75pt}
+\vspace*{55pt}
+\begin{center}
+  %% \captionof{table}{Hello world}
+  \captionof*{table}{\boldblue{Table:} Average classification precision ({\%}) of count labels across various algorithms.}
+\end{center}
+\vspace*{-25pt}
 \begin{tikzfigure}
-    %% \begin{tabular*}{\innerblocklinewidth}{{\extracolsep{\fill}}lllllll}
-    \begin{tabular}{lllllll}
+    \begin{tabularx}{0.95\linewidth}{lXXXXXX}
     \toprule
     Count Label $\rightarrow$ & \quad 0 & \quad 1 & \quad 2 & \quad 3 & \quad 4+ & \quad mean \\
     \midrule
@@ -484,12 +526,12 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
     CNN\_FT & \quad 93.6 & \quad93.8 & \quad75.2 & \quad58.6 & \quad71.6 & \quad78.6 \\
     VAE + softmax (ours) & \quad76.0 & \quad49.0 & \quad40.0 & \quad27.0 & \quad30.0 & \quad44.4 \\
     \bottomrule
-    \end{tabular}
+    \end{tabularx}
 \end{tikzfigure}
-\vspace*{75pt}
+\vspace*{55pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
-\innerblock{}{We compare our \boldblue{unsupervised approach} to existing supervised approaches to instance counting. The strength of the representation learned by the VAE is measured by fixing it's parameters, and subsequently training a simple \boldblue{softmax classifier} that is latent representations of images with corresponding count labels. Performance is reported over the entire withheld SOS test set as count average precision (\%).} % numbers are not math font as well
+\innerblock{}{We compare our \boldblue{unsupervised approach} to existing supervised approaches to instance counting. The strength of the representation learned by VAE is measured by training a simple \boldblue{softmax classifier} that is fed latent representations of images with corresponding count labels.} % numbers are not math font as well
 }
 
 \useblockstyle{reference}
@@ -500,7 +542,7 @@ Harvey2013topographic maybe move to where the bird figure is now? (cus that's ab
 \block[bodyinnersep=5pt, bodyoffsetx=19pt]{}{
 %% \vspace*{15pt}
 \noindent\makebox[\linewidth]{\textcolor{lightgrey}{\rule{0.35\paperwidth}{0.12cm}}}
-\vspace*{-32pt}
+\vspace*{-39pt}
 {
   %% \begin{center}
     %% \begin{minipage}{0.94\linewidth}

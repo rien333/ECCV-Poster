@@ -4,7 +4,7 @@
 \usepackage{stackengine}
 \usepackage{tikz}
 \usepackage{amssymb}
-\usepackage{mathdots}
+\usepackage{xcolor}
 
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes.geometric}
@@ -19,21 +19,25 @@
 %% \setstackgap{S}{inter-item stackgap}
 %% \setstackgap{L}{1.2em}
 
+% these command don't get defined in poster.tex
 \definecolor{eccvblue}{HTML}{045494}
-\newcommand\boldblue[1]{\textcolor{eccvlightblue}{\textbf{#1}}}
+\definecolor{eccvdarkblue}{HTML}{023258}
+\newcommand\boldblue[1]{\textcolor{eccvblue}{\textbf{#1}}}
+\newcommand\markblue[1]{\textcolor{eccvblue}{{#1}}}
 
 \begin{document}
 
-\tikzset{every picture/.style={line width=0.9pt}}
+\tikzset{every picture/.style={line width=1.0mm}}
 
 %% \begin{figure}[p] % remove when finished
 \begin{tikzpicture}[
-draw=eccvsuperlightblue,
-networknode/.style={regular polygon,regular polygon sides=4, draw=eccvlightblue, fill=none, line width=0.8mm, inner sep=-60pt},
-vectornode/.style={rectangle, draw=eccvsuperlightblue, fill=none, },
-internode/.style={rectangle, draw=eccvsuperlightblue, fill=none, thick},
+draw=black, % mostly affects the braces?
+text=black,
+networknode/.style={regular polygon,regular polygon sides=4, draw=black, fill=none, line width=1.0mm, inner sep=-60pt},
+vectornode/.style={rectangle, draw=black, fill=none, line width=0.5mm},
+internode/.style={rectangle, draw=black, fill=none, line width=0.5mm,},
 imagenode/.style={rectangle, draw=none, fill=none},
->={Triangle[width=4mm,length=2.9mm, fill=eccvsuperlightblue]},->
+>={Triangle[width=4.2mm,length=2.9mm, fill=black]},->
 ]
 
 %Nodes
@@ -41,30 +45,30 @@ imagenode/.style={rectangle, draw=none, fill=none},
 % mention a cnn somewhere
 % also see https://www.researchgate.net/figure/The-high-level-concept-of-an-extended-variational-autoencoder-adopted-for_fig8_317486066
 % http://bjlkeng.github.io/images/variational_autoencoder2.png
-\node[imagenode] (input) [] [label=below:{$X$}]{\includegraphics[width=0.052\textwidth]{in.png}};
+\node[imagenode] (input) [] [label=below:{$X$}]{\includegraphics[width=0.06\textwidth]{in.png}};
 \node[networknode] (encoder) [right=of input][text width=10.1cm, align=center, label=below:{\mbox{$Q(z|X)$}}][label=above:{convolutions}]
-     {\boldblue{Encoder Network}};
-\node[right=3.0cm of encoder] (dummy) {}; 
+     {{\textbf{Encoder Network}}};
+\node[right=3.5cm of encoder] (dummy) {}; 
 \node[internode] (mean) [below=1.4of dummy] {$\mu(X)$};
 \node[internode] (std) [above=1.4of dummy] {$\Sigma(X)$};
 \setstackgap{L}{0.9em}
-\node[vectornode] (latent) [right=3.0cm of dummy] {\Vectorstack{{z_1} \textbf{.} \textbf{.} \textbf{.}  {z_n}}};
+\node[vectornode] (latent) [right=3.5cm of dummy] {\Vectorstack{{z_1} \textbf{.} \textbf{.} \textbf{.}  {z_n}}};
 %% \node[vectornode] (latent) [right=3.0cm of dummy] {\Vectorstack{{z_1} {\large; \vdots}  {z_n}}};
-\node[networknode] (decoder) [right=2.0cm of latent][text width=10.1cm, align=center, label=below:{\mbox{$P(X|z)$}}][label=above:{transposed convolutions}]{\boldblue{Decoder Network}};
-\node[imagenode] (output) [right=of decoder][label=below:$\widetilde{X}$] {\includegraphics[width=0.052\textwidth]{out.png}};
+\node[networknode] (decoder) [right=2.0cm of latent][text width=10.1cm, align=center, label=below:{\mbox{$P(X|z)$}}][label=above:{transposed convolutions}]{{\textbf{Decoder Network}}};
+\node[imagenode] (output) [right=of decoder][label=below:$\widetilde{X}$] {\includegraphics[width=0.06\textwidth]{out.png}};
 
 %Lines
 %% \draw[-strongT, line width=0.35mm] (input.east) -- (encoder.west);
-\draw[->] ($(input.east) + (-0.3, 0)$) -- (encoder.west);
+\draw[->, black] ($(input.east) + (-0.3, 0)$) -- (encoder.west);
 %% \draw (encoder.south) node[label=below:$b_1$,draw]{}
-\draw[->] ($(encoder.east)+(0,0.3)$) |- ++(.5,0.0) -- ++(0, 0.9) |- (std.west);
-\draw[->] ($(encoder.east)+(0,-0.3)$) |- ++(.5,-0.0) -- ++(0, -0.9) |- (mean.west);
-\draw[->] (mean.east) |- ++(.5,-0.0) -- ++(0, 0.0) |- ($(latent.west)+(0, -0.3)$);
-\draw[->] (std.east) |- ++(.5,-0.0) -- ++(0, -0.0) |- ($(latent.west)+(0, 0.3)$);
-\draw[->] (latent.east) -- (decoder.west);
-\draw[->] (decoder.east) -- ($(output.west) + (0.3,0)$);
+\draw[->, black] ($(encoder.east)+(0,0.3)$) |- ++(.5,0.0) -- ++(0, 0.9) |- (std.west);
+\draw[->, black] ($(encoder.east)+(0,-0.3)$) |- ++(.5,-0.0) -- ++(0, -0.9) |- (mean.west);
+\draw[->, black] (mean.east) |- ++(.5,-0.0) -- ++(0, 0.0) |- ($(latent.west)+(0, -0.3)$);
+\draw[->, black] (std.east) |- ++(.5,-0.0) -- ++(0, -0.0) |- ($(latent.west)+(0, 0.3)$);
+\draw[->, black] (latent.east) -- (decoder.west);
+\draw[->, black] (decoder.east) -- ($(output.west) + (0.3,0)$);
 \tikzset{>={Triangle[width=0.001mm,length=0.01mm]},->}
-\draw[decorate,decoration={brace, amplitude=13pt}] (latent.east |- 0, -3.65) --
+\draw[decorate, line width=0.5mm, decoration={brace, amplitude=13pt}] (latent.east |- 0, -3.65) --
         node[below, yshift=-5.3mm]{sample $z \thicksim \mathcal{N}(\mu(X), \Sigma(X))$} (mean.west |- 0, -3.65); 
 %% \draw[->] (decoder.west) .. controls +(down:7mm) and +(right:7mm) .. (lowercircle.east);
 %% \draw[->] (decoder.west) 
