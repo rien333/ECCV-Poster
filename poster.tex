@@ -300,7 +300,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
         Numerosity, the number of objects in a set, is a basic property of visual scenes. Inspired by \citet{stoianov2012} we propose an \boldblue{unsupervised} generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we employ a hierarchically organized \boldblue{convolutional variational autoencoder} (VAE) tasked with encoding and reconstructing training images. Provided that numerosity is a key characteristic in the images, the network will learn to encode visual numerosity in the latent representation.\par} % \par changes a lot
       \end{minipage}
   \end{center}
-\vspace*{10pt} % not sure why this is needed
+\vspace*{5pt} % whitespace between title and content
 }}
 % Horitzontal rule that looks only sorta okay and takes up space
 %%   \vspace*{10pt}
@@ -315,6 +315,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock[bodyinnersep=25pt, bodyverticalshift=-00pt]{}{
   \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
+  \setlength\itemsep{0.8em}
   \item Visual numerosity in the subitizing range emerges as a statistical property of natural images in VAEs.
 %%  \end{itemize}
 %%   \vspace*{-25pt}
@@ -346,7 +347,10 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 
 \block{VARIATIONAL AUTOENCODER}{
 \colorlet{innerblockbodybgcolor}{white}
-\innerblock[bodyoffsetx=-40pt]{}{\vspace*{-20pt}\hspace*{-30pt}\includestandalone{vae_diagram}
+\innerblock[bodyoffsetx=-40pt]{}{
+  \vspace*{10pt}
+  \hspace*{-30pt}\includestandalone{vae_diagram}
+  \vspace*{10pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
@@ -391,11 +395,21 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 }
 }
 
-\block{BLOCK 2}{
+\block{VISUAL NUMBER SENSE}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
-Also check out nieder2016 for figures mayeb?
-the one paper (pre-Nieder) with "integral part of the visual world" maybe has figures as well. Reflection of the visiospatial systems... (see paper?) How does the perceptually immediate character of subitizing arise? (visiospatial system) Lakoff voor een goede grafiek?
+%% the one paper (pre-Nieder) with "integral part of the visual world" maybe has figures as well. Reflection of the visiospatial systems... (see paper?) How does the perceptually immediate character of subitizing arise? (visiospatial system)
+% "Sudden" character of subitizing
+% Cogntive proccesing of indicates , indicating that numerosity is a perceptual category.
+\begin{minipage}{0.59\linewidth}
+Immediate but limited exact \boldblue{visual numerosity} processing abilities could be a result of a capacity-limited multiple object individuation mechanism that performs \boldblue{parallel processing} of salient objects \citep{poncet2016individuation}. The cause of it's \boldblue{sudden} character is hypothesized to be a byproduct of the visiospatial system's automatic salient object map generation of a limited number of salient locations in the visual field \citep{piazza2009humans}.
+\end{minipage}
+\begin{minipage}{0.48\linewidth}
+\vspace*{-6pt}
+\begin{tikzfigure}
+  \includegraphics[width=0.75\textwidth]{subcrop}
+\end{tikzfigure}
+\end{minipage}
 }
 }
 
@@ -428,7 +442,7 @@ the one paper (pre-Nieder) with "integral part of the visual world" maybe has fi
     \centering
     \begin{tikzfigure}
       \vspace*{-10pt}
-      \hspace*{-10pt}\includegraphics[width=0.9\linewidth]{bce_dfc_crop}
+      \hspace*{-10pt}\includegraphics[width=0.85\linewidth]{bce_dfc_crop}
     \end{tikzfigure}
   \end{minipage}\hfill
   \begin{minipage}{0.494\linewidth}
@@ -436,16 +450,16 @@ the one paper (pre-Nieder) with "integral part of the visual world" maybe has fi
     %% \hspace*{45pt}
     \begin{tikzfigure}
       \vspace*{-10pt}
-      \hspace*{15pt}\includegraphics[width=0.19\linewidth]{syn1}\hspace{3pt}%
-      \includegraphics[width=0.19\linewidth]{syn2}\hspace{3pt}%
-      \includegraphics[width=0.19\linewidth]{syn3}\hspace{3pt}%
-      \includegraphics[width=0.19\linewidth]{syn4}\\%
+      \hspace*{15pt}\includegraphics[width=0.18\linewidth]{syn1}\hspace{3pt}%
+      \includegraphics[width=0.18\linewidth]{syn2}\hspace{3pt}%
+      \includegraphics[width=0.18\linewidth]{syn3}\hspace{3pt}%
+      \includegraphics[width=0.18\linewidth]{syn4}\\%
       %% \bigskip
       \vspace*{3pt}
-      \hspace*{15pt}\includegraphics[width=0.19\linewidth]{syn1b}\hspace{3pt}%
-      \includegraphics[width=0.19\linewidth]{syn2b}\hspace{3pt}%
-      \includegraphics[width=0.19\linewidth]{syn3b}\hspace{3pt}%
-      \includegraphics[width=0.19\linewidth]{syn4b}%
+      \hspace*{15pt}\includegraphics[width=0.18\linewidth]{syn1b}\hspace{3pt}%
+      \includegraphics[width=0.18\linewidth]{syn2b}\hspace{3pt}%
+      \includegraphics[width=0.18\linewidth]{syn3b}\hspace{3pt}%
+      \includegraphics[width=0.18\linewidth]{syn4b}%
     \end{tikzfigure}%
  \end{minipage}%
   
@@ -469,7 +483,7 @@ the one paper (pre-Nieder) with "integral part of the visual world" maybe has fi
 
 \useblockstyle{eccv2}
 \begin{columns}
-\column{0.53}
+\column{0.5}
 
 
 \block{SIZE-INVARIANT NUMEROSITY DETECTORS}{
@@ -479,8 +493,8 @@ the one paper (pre-Nieder) with "integral part of the visual world" maybe has fi
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
     \vspace*{-12pt}
-    \includegraphics[width=0.45\linewidth]{NN}
-    \includegraphics[width=0.45\linewidth]{NA}
+    \includegraphics[width=0.41\linewidth]{NN}
+    \includegraphics[width=0.41\linewidth]{NA}
   \end{tikzfigure}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
@@ -492,18 +506,18 @@ the one paper (pre-Nieder) with "integral part of the visual world" maybe has fi
   % Reference here?
 \vspace*{-20pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.45\textwidth]{bird_varied_crop}
+  \includegraphics[width=0.41\textwidth]{bird_varied_crop}
 \end{tikzfigure}
 
 }
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
-  Comparable with biological neuronal networks, an analysis of the learned representations revealed that numerosity is represented \boldblue{invariant to cumulative object area}. However, no latent dimension represents just one visual property. %
+  Comparable with biological neurl networks, an analysis of the learned representations revealed that numerosity is represented \boldblue{invariant to cumulative object area}. However, no latent dimension represents just one visual property. %
 % The results were obtained by performing a linear regression over a controlled synthetic dataset aimed at moderating object size  and visual variation in object and background classes. 
 }
 }
 
-\column{0.47}
+\column{0.5}
 
 \block{SUBITIZING TASK PERFORMANCE}{
 \colorlet{innerblockbodybgcolor}{white}
@@ -531,13 +545,13 @@ the one paper (pre-Nieder) with "integral part of the visual world" maybe has fi
 \vspace*{55pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
-\innerblock{}{We compare our \boldblue{unsupervised approach} to existing supervised approaches to instance counting. The strength of the representation learned by VAE is measured by training a simple \boldblue{softmax classifier} that is fed latent representations of images with corresponding count labels.} % numbers are not math font as well
+\innerblock{}{We compare our \boldblue{unsupervised approach} to existing supervised approaches to instance counting. The strength of the representation learned by the VAE is measured by training a simple \boldblue{softmax classifier} that is fed latent representations of images with corresponding count labels.} % numbers are not math font as well
 }
 
 \useblockstyle{reference}
 % not sure if this actually centers text but it is more centered I guess
  %% screws with the centering
-%% \renewcommand*{\bibfont}{\small}
+\renewcommand*{\bibfont}{\normalsize}
 
 \block[bodyinnersep=5pt, bodyoffsetx=19pt]{}{
 %% \vspace*{15pt}
