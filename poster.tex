@@ -7,7 +7,6 @@
 % disable hypnetation
 \usepackage[none]{hyphenat} % behaves kinda odd, requires multiple compiles?
 
-
 \usepackage{blindtext}
 \usepackage{xcolor}
 \usepackage{multicol}
@@ -23,7 +22,6 @@
 \DeclareCaptionFormat{postersize}{\fontsize{30}{36}\selectfont#1#2#3}
 \captionsetup{format=postersize}
 \usepackage{tabularx}
-
 
 % tikz
 \usepackage{standalone}
@@ -59,13 +57,16 @@
 % remove "References" heading in natbib
 \renewcommand{\bibsection}{}
 
+
 \usepackage[]{fontspec}
 \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
 \setmainfont{Open Sans}
-%% \setmonofont{Inconsolata-dz}
 %% \usepackage[T1]{fontenc}
 %% this scaling feature is pretty handy
 %% \usepackage[default,scale=0.79]{opensans}
+
+%% \usepackage[default]{lato}
+%% \usepackage[T1]{fontenc}
 
 %% \renewenvironment{tikzfigure}[1][]{
 %%   \begin{center}
@@ -297,7 +298,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
       % ook te lang (misschien kan de 1e zin weg of anders)
       % 	- Als je de 1e zin weghaalt kun je misschien bij de laatste zin
       % 	  iets doen als "Provided that..."
-        Numerosity, the number of objects in a set, is a basic property of visual scenes. Inspired by \citet{stoianov2012} we propose an \boldblue{unsupervised} generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we employ a hierarchically organized \boldblue{convolutional variational autoencoder} (VAE) tasked with encoding and reconstructing training images. Provided that numerosity is a key characteristic in the images, the network will learn to encode visual numerosity in the latent representation.\par} % \par changes a lot
+        Numerosity, the number of objects in a set, is a basic property of visual scenes. Inspired by \citet{stoianov2012} we propose an \boldblue{unsupervised} generative model to learn visual numerosity representations from natural and synthetic image datasets catered to instance counting within the subitizing range. Specifically, we use a hierarchically organized \boldblue{convolutional variational autoencoder} (VAE) for encoding and reconstructing training images. Provided that numerosity is a key characteristic in the images, the network will learn to encode visual numerosity in the latent representation.\par}
       \end{minipage}
   \end{center}
 \vspace*{5pt} % whitespace between title and content
@@ -323,7 +324,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 %% \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 %% \innerblock[bodyverticalshift=-10pt]{}{
 %%   \begin{itemize}[leftmargin=*]
-  \item  Numerosity and object area are represented seperately, similair to biological neural networks.
+  \item  Numerosity and object area are represented seperately, similar to biological neural networks.
 %% \end{itemize}
 %%   \vspace*{-25pt}
 %% }
@@ -338,7 +339,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 %% \innerblock[bodyverticalshift=-10pt]{}{
 %%   \begin{itemize}[leftmargin=*]
   %% \item Our unsupervised method performs comparably to supervised algorithms on a subitizing task.
-  \item Numerisoty information represented in the latent space is succesfully extrapolated to a subitizing task.
+  \item Numerosity information represented in the latent space is succesfully extrapolated to a subitizing task.
   \end{itemize}
   %% \vspace*{-25pt}
 }
@@ -354,7 +355,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
-\boldblue{VAEs} are generative algorithms that perform \boldblue{unsupervised} representation learning. 
+\boldblue{VAEs} are generative models that perform \boldblue{unsupervised} representation learning. 
 %Unlike the deterministic latent representation used in conventional autoencoders, VAEs map data samples to a posterior distribution $Q$ representing the latent space. 
 The VAE's objective function is the summation of a reconstruction term and a KL regularization:
 %
@@ -401,13 +402,19 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 %% the one paper (pre-Nieder) with "integral part of the visual world" maybe has figures as well. Reflection of the visiospatial systems... (see paper?) How does the perceptually immediate character of subitizing arise? (visiospatial system)
 % "Sudden" character of subitizing
 % Cogntive proccesing of indicates , indicating that numerosity is a perceptual category.
-\begin{minipage}{0.59\linewidth}
-Immediate but limited exact \boldblue{visual numerosity} processing abilities could be a result of a capacity-limited multiple object individuation mechanism that performs \boldblue{parallel processing} of salient objects \citep{poncet2016individuation}. The cause of it's \boldblue{sudden} character is hypothesized to be a byproduct of the visiospatial system's automatic salient object map generation of a limited number of salient locations in the visual field \citep{piazza2009humans}.
+\begin{minipage}{0.54\linewidth}
+\begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
+  \setlength\itemsep{0.5em}
+  \item Automatic sensory apprication of exact numerosity is achieved through \boldblue{parallel processing} \citep{dehaene2011number}
+  \item Nonmediated (conciously), lower neural process in the visiospatial system \cite{piazza2009humans}
+  \item Emergent property of neural populations embedded in hierarchical generative models
+\end{itemize}
+%% Immediate but limited exact \boldblue{visual numerosity} processing abilities could be a result of a capacity-limited multiple object individuation mechanism that performs \boldblue{parallel processing} of salient objects \citep{poncet2016individuation}. The cause of it's \boldblue{sudden} character is hypothesized to be a byproduct of the visiospatial system's automatic salient object map generation of a limited number of salient locations in the visual field \citep{piazza2009humans}. 
 \end{minipage}
-\begin{minipage}{0.48\linewidth}
-\vspace*{-6pt}
+\begin{minipage}{0.5\linewidth}
+%% \vspace*{-6pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.75\textwidth]{subcrop}
+  \includegraphics[width=0.79\textwidth]{subcrop}
 \end{tikzfigure}
 \end{minipage}
 }
@@ -492,9 +499,9 @@ Immediate but limited exact \boldblue{visual numerosity} processing abilities co
   % all tikz figures need slight manual recentering
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
-    \vspace*{-12pt}
-    \includegraphics[width=0.41\linewidth]{NN}
-    \includegraphics[width=0.41\linewidth]{NA}
+    \vspace*{-19pt}
+    \includegraphics[width=0.405\linewidth]{NN}\hspace{50pt}
+    \includegraphics[width=0.405\linewidth]{NA}
   \end{tikzfigure}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
