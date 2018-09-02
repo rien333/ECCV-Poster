@@ -320,40 +320,19 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
   \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
   \setlength\itemsep{0.8em}
   \item Visual numerosity in the subitizing range emerges as a statistical property of natural images in VAEs.
-%%  \end{itemize}
-%%   \vspace*{-25pt}
-%% }
-%% \colorlet{innerblockbodybgcolor}{eccvgrayblue}
-%% \innerblock[bodyverticalshift=-10pt]{}{
-%%   \begin{itemize}[leftmargin=*]
   \item  Numerosity and object area are represented seperately, similar to biological neural networks.
-%% \end{itemize}
-%%   \vspace*{-25pt}
-%% }
-%% \colorlet{innerblockbodybgcolor}{white}
-%% \innerblock[bodyverticalshift=-10pt]{}{
-%%   \begin{itemize}[leftmargin=*]
   \item A loss function aimed at contour reconstruction improves the network's subitizing performance.
-%%   \end{itemize}
-%%   \vspace*{-25pt}
-%% }
-%% \colorlet{innerblockbodybgcolor}{eccvgrayblue}
-%% \innerblock[bodyverticalshift=-10pt]{}{
-%%   \begin{itemize}[leftmargin=*]
-  %% \item Our unsupervised method performs comparably to supervised algorithms on a subitizing task.
   \item Numerosity information represented in the latent space is succesfully extrapolated to a subitizing task.
   \end{itemize}
-  %% \vspace*{-25pt}
 }
-%% \end{itemize}
 }
 
 \block{VARIATIONAL AUTOENCODER}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock[bodyoffsetx=-40pt]{}{
-  \vspace*{10pt}
+  \vspace*{17pt}
   \hspace*{-30pt}\includestandalone{vae_diagram}
-  \vspace*{10pt}
+  \vspace*{17pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
@@ -393,7 +372,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 % More point like?
 % the subitizing range modulates the cognitive mechanisms directed at instance counting
-\innerblock{}{\boldblue{Subitizing} is a perceptual ability that enables rapid and spontaneous identification of the numerosity of small visual sets. When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cognitive mechanisms related to instance counting are employed. We explore the emergence of visual number sense in unsupervised deep networks trained on \boldblue{natural images} from the \boldblue{Salient Object Subitizing Dataset} \citep{zhang2016salient}. 
+\innerblock{}{\boldblue{Subitizing} is a perceptual ability that enables rapid and spontaneous identification of the numerosity of small visual sets. When the \boldblue{subitizing range} of 1 -- 4 instances is exceeded, other cognitive mechanisms related to instance counting are invoked. We explore the emergence of visual number sense in unsupervised deep networks trained on \boldblue{natural images} from the \boldblue{Salient Object Subitizing Dataset} \citep{zhang2016salient}. 
 % The complexity of natural visual scenes helps capture the abstract nature of number sense.
 }
 }
@@ -407,8 +386,9 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 % maybe wrapfig works better but couldn't get it to work
 \begin{minipage}{0.57\linewidth}
 %% \begin{hyphenrules}{nohyphenation}
+\vspace*{-20pt}
 \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
-  \setlength\itemsep{0.5em}
+  \setlength\itemsep{1.5em}
   %% \item Separate systems for exact and approximate numerosity representation
   \item \boldblue{Parallel processing} achieves rapid perceptual discrimination of exact numerosity \citep{dehaene2011number}.
    %% \item Automatic map generation  of salient objects is performed in the visiospatial system.
@@ -422,7 +402,8 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \begin{minipage}{0.55\linewidth}
 %% \vspace*{-6pt}
 \begin{tikzfigure}
-  \hspace*{-90pt}\includegraphics[width=0.75\textwidth]{subcrop}
+  \vspace*{-10pt}
+  \hspace*{-90pt}\includegraphics[width=0.74\textwidth, height=12cm]{subcrop}
 \end{tikzfigure}
 \end{minipage}
 }
@@ -433,7 +414,8 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 %% \begin{columns}
 %% \column{0.5}
 \useblockstyle{eccv2optimizations}
-\block{VISUAL OPTIMIZATION RESULTS}{
+% Misschien: RECONSTRUCTIONAL OPTIMIZATIONS? 🐝🐝🐝
+\block{DATA RECONSTRUCTION OPTIMIZATIONS}{
 %% \begin{minipage}[t]{0.4\linewidth}
 
 \useinnerblockstyle{eccvinneroptimizations}
@@ -465,16 +447,16 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
     %% \hspace*{45pt}
     \begin{tikzfigure}
       \vspace*{-10pt}
-      \hspace*{15pt}\includegraphics[width=0.175\linewidth]{syn1}\hspace{3pt}%
-      \includegraphics[width=0.175\linewidth]{syn2}\hspace{3pt}%
-      \includegraphics[width=0.175\linewidth]{syn3}\hspace{3pt}%
-      \includegraphics[width=0.175\linewidth]{syn4}\\%
+      \hspace*{15pt}\includegraphics[width=0.17\linewidth]{syn1}\hspace{3pt}%
+      \includegraphics[width=0.17\linewidth]{syn2}\hspace{3pt}%
+      \includegraphics[width=0.17\linewidth]{syn3}\hspace{3pt}%
+      \includegraphics[width=0.17\linewidth]{syn4}\\%
       %% \bigskip
       \vspace*{3pt}
-      \hspace*{15pt}\includegraphics[width=0.175\linewidth]{syn1b}\hspace{3pt}%
-      \includegraphics[width=0.175\linewidth]{syn2b}\hspace{3pt}%
-      \includegraphics[width=0.175\linewidth]{syn3b}\hspace{3pt}%
-      \includegraphics[width=0.175\linewidth]{syn4b}%
+      \hspace*{15pt}\includegraphics[width=0.17\linewidth]{syn1b}\hspace{3pt}%
+      \includegraphics[width=0.17\linewidth]{syn2b}\hspace{3pt}%
+      \includegraphics[width=0.17\linewidth]{syn3b}\hspace{3pt}%
+      \includegraphics[width=0.17\linewidth]{syn4b}%
     \end{tikzfigure}%
  \end{minipage}%
   
@@ -507,21 +489,17 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
   % all tikz figures need slight manual recentering
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
-    \vspace*{-19pt}
-    \includegraphics[width=0.40\linewidth]{NN}\hspace{50pt}
-    \includegraphics[width=0.40\linewidth]{NA}
+    \vspace*{-20pt}
+    \includegraphics[width=0.385\linewidth]{NN}\hspace{60pt}
+    \includegraphics[width=0.385\linewidth]{NA}
   \end{tikzfigure}
+\captionof*{table}{\boldblue{Figure:} Latent dimension response to shifts in object area and numerosity.}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
-  %% \vspace*{-10pt}
-  %% \begin{tikzfigure}
-  %%   \includegraphics[width=40cm]{bird_varied_crop}
-  %% \end{tikzfigure}
-  % Reference here?
 \vspace*{-20pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.39\textwidth]{bird_varied_crop}
+  \includegraphics[width=0.385\textwidth]{bird_varied_crop}
 \end{tikzfigure}
 
 }
