@@ -5,7 +5,8 @@
 \documentclass[25pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=40pt, blockverticalspace=45pt]{tikzposter}
 
 % disable hypnetation
-\usepackage[none]{hyphenat} % behaves kinda odd, requires multiple compiles?
+%% \usepackage[none]{hyphenat} % behaves kinda odd, requires multiple compiles?
+\usepackage{babel}
 
 \usepackage{blindtext}
 \usepackage{xcolor}
@@ -22,6 +23,7 @@
 \DeclareCaptionFormat{postersize}{\fontsize{30}{36}\selectfont#1#2#3}
 \captionsetup{format=postersize}
 \usepackage{tabularx}
+%% \usepackage{wrapfig} % doesn't work so far
 
 % tikz
 \usepackage{standalone}
@@ -119,7 +121,7 @@
       % seperator line
       \path (blockbody.south) 
       % sorta add these corrdinates/values to the start
-      +(0.0cm,7cm) coordinate (c1);
+      +(0.0cm,6cm) coordinate (c1);
       \path (blockbody.north)
       +(0.0cm, -1cm) coordinate (c2);
       %% \draw [line width=0.42cm,eccvgrayblue, dashed, dash pattern=on 20pt off 20pt] (blockbody.south) -- (blockbody.north);
@@ -402,19 +404,25 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 %% the one paper (pre-Nieder) with "integral part of the visual world" maybe has figures as well. Reflection of the visiospatial systems... (see paper?) How does the perceptually immediate character of subitizing arise? (visiospatial system)
 % "Sudden" character of subitizing
 % Cogntive proccesing of indicates , indicating that numerosity is a perceptual category.
-\begin{minipage}{0.54\linewidth}
+% maybe wrapfig works better but couldn't get it to work
+\begin{minipage}{0.57\linewidth}
+%% \begin{hyphenrules}{nohyphenation}
 \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
   \setlength\itemsep{0.5em}
-  \item Automatic sensory apprication of exact numerosity is achieved through \boldblue{parallel processing} \citep{dehaene2011number}
-  \item Nonmediated (conciously), lower neural process in the visiospatial system \cite{piazza2009humans}
-  \item Emergent property of neural populations embedded in hierarchical generative models
+  %% \item Separate systems for exact and approximate numerosity representation
+  \item \boldblue{Parallel processing} achieves rapid perceptual discrimination of exact numerosity \citep{dehaene2011number}.
+   %% \item Automatic map generation  of salient objects is performed in the visiospatial system.
+   \item The visiospatial system performs \boldblue{nonmediated} spatial map generation of salient objects \cite{piazza2009humans}.
+  %% \item Subitizing is a \boldblue{nonmediated} process originating in the visiospatial system \cite{piazza2009humans} 
+  \item Neural populations can automatically develop the ability to judge visual numerosity.
 \end{itemize}
+%% \end{hyphenrules}
 %% Immediate but limited exact \boldblue{visual numerosity} processing abilities could be a result of a capacity-limited multiple object individuation mechanism that performs \boldblue{parallel processing} of salient objects \citep{poncet2016individuation}. The cause of it's \boldblue{sudden} character is hypothesized to be a byproduct of the visiospatial system's automatic salient object map generation of a limited number of salient locations in the visual field \citep{piazza2009humans}. 
 \end{minipage}
-\begin{minipage}{0.5\linewidth}
+\begin{minipage}{0.55\linewidth}
 %% \vspace*{-6pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.79\textwidth]{subcrop}
+  \hspace*{-90pt}\includegraphics[width=0.75\textwidth]{subcrop}
 \end{tikzfigure}
 \end{minipage}
 }
@@ -449,7 +457,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
     \centering
     \begin{tikzfigure}
       \vspace*{-10pt}
-      \hspace*{-10pt}\includegraphics[width=0.85\linewidth]{bce_dfc_crop}
+      \hspace*{-10pt}\includegraphics[width=0.8\linewidth]{bce_dfc_crop}
     \end{tikzfigure}
   \end{minipage}\hfill
   \begin{minipage}{0.494\linewidth}
@@ -457,16 +465,16 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
     %% \hspace*{45pt}
     \begin{tikzfigure}
       \vspace*{-10pt}
-      \hspace*{15pt}\includegraphics[width=0.18\linewidth]{syn1}\hspace{3pt}%
-      \includegraphics[width=0.18\linewidth]{syn2}\hspace{3pt}%
-      \includegraphics[width=0.18\linewidth]{syn3}\hspace{3pt}%
-      \includegraphics[width=0.18\linewidth]{syn4}\\%
+      \hspace*{15pt}\includegraphics[width=0.175\linewidth]{syn1}\hspace{3pt}%
+      \includegraphics[width=0.175\linewidth]{syn2}\hspace{3pt}%
+      \includegraphics[width=0.175\linewidth]{syn3}\hspace{3pt}%
+      \includegraphics[width=0.175\linewidth]{syn4}\\%
       %% \bigskip
       \vspace*{3pt}
-      \hspace*{15pt}\includegraphics[width=0.18\linewidth]{syn1b}\hspace{3pt}%
-      \includegraphics[width=0.18\linewidth]{syn2b}\hspace{3pt}%
-      \includegraphics[width=0.18\linewidth]{syn3b}\hspace{3pt}%
-      \includegraphics[width=0.18\linewidth]{syn4b}%
+      \hspace*{15pt}\includegraphics[width=0.175\linewidth]{syn1b}\hspace{3pt}%
+      \includegraphics[width=0.175\linewidth]{syn2b}\hspace{3pt}%
+      \includegraphics[width=0.175\linewidth]{syn3b}\hspace{3pt}%
+      \includegraphics[width=0.175\linewidth]{syn4b}%
     \end{tikzfigure}%
  \end{minipage}%
   
@@ -481,7 +489,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 %% \setlength\columnseprule{0.0cm}
 \begin{multicols}{2}
 % Could drop the first sentence from this block, and the second of the other
-{Reconstruction of figure-ground organization was improved by employing \boldblue{Feature Perceptual Loss} \citep{hou2017deep} which uses intermediate layer representations from a pretrained network in the objective function of the VAE.\par}
+{\boldblue{Feature Perceptual Loss} \citep{hou2017deep} improved object contour reconstruction by using intermediate layer representations from a pretrained network in the objective function of the VAE.\par}
 {Augmentation of the SOS dataset with \boldblue{synthetic data} was required to familiarize the model with an extensive distribution of object types and the spatial configurations thereof.}
 %% \vskip 0.11em
 \end{multicols}
@@ -500,8 +508,8 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
     \vspace*{-19pt}
-    \includegraphics[width=0.405\linewidth]{NN}\hspace{50pt}
-    \includegraphics[width=0.405\linewidth]{NA}
+    \includegraphics[width=0.40\linewidth]{NN}\hspace{50pt}
+    \includegraphics[width=0.40\linewidth]{NA}
   \end{tikzfigure}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
@@ -513,14 +521,15 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
   % Reference here?
 \vspace*{-20pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.41\textwidth]{bird_varied_crop}
+  \includegraphics[width=0.39\textwidth]{bird_varied_crop}
 \end{tikzfigure}
 
 }
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
-  Comparable with biological neural networks, an analysis of the learned representations revealed that numerosity is represented \boldblue{invariant to cumulative object area}. However, no latent dimension represents just one visual property. %
-% The results were obtained by performing a linear regression over a controlled synthetic dataset aimed at moderating object size  and visual variation in object and background classes. 
+  Latent dimensions of the learned representations encode complex information, whereby numerosity is likely encoded \boldblue{invariant of cumulative object area}.
+ Biological neural networks showcase a similair property.
+  %% Comparable with biological neural networks, an analysis of the learned representations revealed that numerosity is represented . However, no latent dimension represents just one visual property. %
 }
 }
 
