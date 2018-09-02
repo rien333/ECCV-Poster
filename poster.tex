@@ -15,6 +15,7 @@
 \usepackage{stackengine}
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem}
+\usepackage{geometry}
 
 % figures
 \usepackage{graphicx}
@@ -386,9 +387,9 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 % maybe wrapfig works better but couldn't get it to work
 \begin{minipage}{0.57\linewidth}
 %% \begin{hyphenrules}{nohyphenation}
-\vspace*{-20pt}
+\vspace*{-25pt}
 \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
-  \setlength\itemsep{1.5em}
+  \setlength\itemsep{1.25em}
   %% \item Separate systems for exact and approximate numerosity representation
   \item \boldblue{Parallel processing} achieves rapid perceptual discrimination of exact numerosity \citep{dehaene2011number}.
    %% \item Automatic map generation  of salient objects is performed in the visiospatial system.
@@ -414,8 +415,8 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 %% \begin{columns}
 %% \column{0.5}
 \useblockstyle{eccv2optimizations}
-% Misschien: RECONSTRUCTIONAL OPTIMIZATIONS? 🐝🐝🐝
-\block{DATA RECONSTRUCTION OPTIMIZATIONS}{
+% Misschien: RECONSTRUCTIONAL OPTIMIZATIONS? 
+\block{OPTIMIZING THE RECONSTRUCTIONS}{
 %% \begin{minipage}[t]{0.4\linewidth}
 
 \useinnerblockstyle{eccvinneroptimizations}
@@ -490,23 +491,24 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
     \vspace*{-20pt}
-    \includegraphics[width=0.385\linewidth]{NN}\hspace{60pt}
-    \includegraphics[width=0.385\linewidth]{NA}
+    \includegraphics[width=0.405\linewidth]{NN}\hspace{60pt}
+    \includegraphics[width=0.405\linewidth]{NA}
   \end{tikzfigure}
-\captionof*{table}{\boldblue{Figure:} Latent dimension response to shifts in object area and numerosity.}
+\vspace*{-5pt}
+% Maybe Fig.
+\captionof*{table}{\boldblue{Figure.} Responses of latent dimensions to changes in object area and numerosity.}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
 \vspace*{-20pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.385\textwidth]{bird_varied_crop}
+  \includegraphics[width=0.39\textwidth]{bird_varied_crop}
 \end{tikzfigure}
 
 }
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
-  Latent dimensions of the learned representations encode complex information, whereby numerosity is likely encoded \boldblue{invariant of cumulative object area}.
- Biological neural networks showcase a similair property.
+  Latent dimensions of the learned representations encode complex information. Numerosity is likely encoded \boldblue{invariant of cumulative object area}, as in biological neural networks.
   %% Comparable with biological neural networks, an analysis of the learned representations revealed that numerosity is represented . However, no latent dimension represents just one visual property. %
 }
 }
@@ -516,10 +518,11 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \block{SUBITIZING TASK PERFORMANCE}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock{}{
-\vspace*{55pt}
+\vspace*{95pt}
 \begin{center}
-  %% \captionof{table}{Hello world}
-  \captionof*{table}{\boldblue{Table:} Average classification precision ({\%}) of count labels across various algorithms.}
+  %% Possibly make "avg. classification precs." italic
+  % Remove state-of-the-art, there's mostly lower performing algorithms
+  \captionof*{table}{\boldblue{Table.}  Average classification precision ({\%}) of count labels.}
 \end{center}
 \vspace*{-25pt}
 \begin{tikzfigure}
@@ -536,7 +539,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
     \bottomrule
     \end{tabularx}
 \end{tikzfigure}
-\vspace*{55pt}
+\vspace*{95pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{We compare our \boldblue{unsupervised approach} to existing supervised approaches to instance counting. The strength of the representation learned by the VAE is measured by training a simple \boldblue{softmax classifier} that is fed latent representations of images with corresponding count labels.} % numbers are not math font as well
