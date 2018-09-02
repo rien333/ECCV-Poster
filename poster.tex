@@ -4,8 +4,12 @@
 % innermargin was 40pt, idk what's printable
 \documentclass[25pt, a0paper, portrait, margin=0pt, innermargin=40pt, colspace=40pt, blockverticalspace=45pt]{tikzposter}
 
+% Typography
 % disable hypnetation
 %% \usepackage[none]{hyphenat} % behaves kinda odd, requires multiple compiles?
+\usepackage{textcomp}
+\usepackage{hyphenat}
+\usepackage[all]{nowidow}
 \usepackage{babel}
 
 \usepackage{blindtext}
@@ -61,12 +65,12 @@
 \renewcommand{\bibsection}{}
 
 
-\usepackage[]{fontspec}
-\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
-\setmainfont{Open Sans}
-%% \usepackage[T1]{fontenc}
+%% \usepackage[]{fontspec}
+%% \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+%% \setmainfont{Open Sans}
+\usepackage[T1]{fontenc}
 %% this scaling feature is pretty handy
-%% \usepackage[default,scale=0.79]{opensans}
+\usepackage[default,scale=0.79]{opensans}
 
 %% \usepackage[default]{lato}
 %% \usepackage[T1]{fontenc}
@@ -241,7 +245,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 \author{Rijnder Wever, Tom Runia}
 \date{\today}
 \institute{University of Amsterdam}
-\titlegraphic{\includegraphics[width=3.6cm]{UVA-plain}}
+\titlegraphic{\includegraphics[width=3.7cm]{UVA-plain}}
 
 \usecolorstyle[colorOne=white,colorTwo=black,colorThree=eccvblue]{eccvblue}
 \usetitlestyle{simpletitle}
@@ -253,7 +257,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
   	\noindent\begin{minipage}{0.71\linewidth}
     \vbox{
       \color{titlefgcolor} {\bfseries \fontsize{80}{96} \selectfont \@title \par}
-      \vspace*{1.0em}
+      \vspace*{1.5em}
       % The two different colors in the title are really not that nice
       \color{titlefgcolor} {\huge \@author}}
     %% \vspace*{\fill}
@@ -267,7 +271,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
       \end{minipage}
       \hfill%
       \begin{minipage}{0.4\textwidth}\raggedleft
-        \huge \color{black}University of\\\vspace{-5mm}Amsterdam
+        \hspace*{-25pt}\huge \color{black}University of\\\vspace{-5mm}Amsterdam
       \end{minipage}
     \end{minipage}
 
