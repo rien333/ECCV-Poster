@@ -11,6 +11,7 @@
 \usepackage{hyphenat}
 \usepackage[all]{nowidow}
 \usepackage{babel}
+\usepackage{microtype}
 
 \usepackage{blindtext}
 \usepackage{xcolor}
@@ -325,9 +326,9 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
   \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
   \setlength\itemsep{0.8em}
   \item Visual numerosity in the subitizing range emerges as a statistical property of natural images in VAEs.
-  \item  Numerosity and object area are represented seperately, similar to biological neural networks.
+  \item  Numerosity and object area are represented separately, similar to biological neural networks.
   \item A loss function aimed at contour reconstruction improves the network's subitizing performance.
-  \item Numerosity information represented in the latent space is succesfully extrapolated to a subitizing task.
+  \item Numerosity information represented in the latent space is successfully extrapolated to a subitizing task.
   \end{itemize}
 }
 }
@@ -335,9 +336,9 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 \block{VARIATIONAL AUTOENCODER}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock[bodyoffsetx=-40pt]{}{
-  \vspace*{17pt}
+  \vspace*{20.6pt}
   \hspace*{-30pt}\includestandalone{vae_diagram}
-  \vspace*{17pt}
+  \vspace*{20.6pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
@@ -391,9 +392,9 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 % maybe wrapfig works better but couldn't get it to work
 \begin{minipage}{0.57\linewidth}
 %% \begin{hyphenrules}{nohyphenation}
-\vspace*{-25pt}
+\vspace*{-20pt}
 \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
-  \setlength\itemsep{1.25em}
+  \setlength\itemsep{1.20em}
   %% \item Separate systems for exact and approximate numerosity representation
   \item \boldblue{Parallel processing} achieves rapid perceptual discrimination of exact numerosity \citep{dehaene2011number}.
    %% \item Automatic map generation  of salient objects is performed in the visiospatial system.
@@ -407,8 +408,8 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \begin{minipage}{0.55\linewidth}
 %% \vspace*{-6pt}
 \begin{tikzfigure}
-  \vspace*{-10pt}
-  \hspace*{-90pt}\includegraphics[width=0.74\textwidth, height=12cm]{subcrop}
+  \vspace*{-11pt}
+  \hspace*{-90pt}\includegraphics[width=0.75\textwidth, height=12.2cm]{subcrop}
 \end{tikzfigure}
 \end{minipage}
 }
@@ -485,7 +486,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 
 \useblockstyle{eccv2}
 \begin{columns}
-\column{0.5}
+\column{0.49}
 
 
 \block{SIZE-INVARIANT NUMEROSITY DETECTORS}{
@@ -495,8 +496,8 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
     \vspace*{-20pt}
-    \includegraphics[width=0.405\linewidth]{NN}\hspace{60pt}
-    \includegraphics[width=0.405\linewidth]{NA}
+    \includegraphics[width=0.41\linewidth]{NN}\hspace{60pt}
+    \includegraphics[width=0.41\linewidth]{NA}
   \end{tikzfigure}
 \vspace*{-5pt}
 % Maybe Fig.
@@ -506,7 +507,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \innerblock{}{
 \vspace*{-20pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.39\textwidth]{bird_varied_crop}
+  \includegraphics[width=0.395\textwidth]{bird_varied_crop}
 \end{tikzfigure}
 
 }
@@ -517,7 +518,7 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 }
 }
 
-\column{0.5}
+\column{0.51}
 
 \block{SUBITIZING TASK PERFORMANCE}{
 \colorlet{innerblockbodybgcolor}{white}
@@ -546,7 +547,12 @@ The VAE's objective function is the summation of a reconstruction term and a KL 
 \vspace*{95pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
-\innerblock{}{We compare our \boldblue{unsupervised approach} to existing supervised approaches to instance counting. The strength of the representation learned by the VAE is measured by training a simple \boldblue{softmax classifier} that is fed latent representations of images with corresponding count labels.} % numbers are not math font as well
+\innerblock{}{
+\vspace*{20pt}
+We compare our \boldblue{unsupervised approach} to existing supervised approaches to instance counting. The strength of the representation learned by the VAE is measured by training a simple \boldblue{softmax classifier} that is fed latent representations of images with corresponding count labels.
+\vspace*{20pt}
+} % numbers are not math font as well
+
 }
 
 \useblockstyle{reference}
