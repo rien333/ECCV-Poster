@@ -65,28 +65,15 @@
 % remove "References" heading in natbib
 \renewcommand{\bibsection}{}
 
-
+% Font settings
 %% \usepackage[]{fontspec}
 %% \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
 %% \setmainfont{Open Sans}
 \usepackage[T1]{fontenc}
 %% this scaling feature is pretty handy
 \usepackage[default,scale=0.79]{opensans}
+\DeclareRobustCommand\ltseries{\fontseries{l}\selectfont}
 
-%% \usepackage[default]{lato}
-%% \usepackage[T1]{fontenc}
-
-%% \renewenvironment{tikzfigure}[1][]{
-%%   \begin{center}
-%%   \hspace{0pt}
-%%   \vfill
-%%   }{
-%%   \vfill
-%%   \hspace{0pt}
-%%   \end{center}
-%% }
-
-%% \meaning\tikzfigure
 
 % based on "Minimal" blockstyle
 % body ofsett 1 is nice bc of the titleless innerblock "glitch"
@@ -260,7 +247,8 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
       \color{titlefgcolor} {\bfseries \fontsize{80}{96} \selectfont \@title \par}
       \vspace*{1.5em}
       % The two different colors in the title are really not that nice
-      \color{titlefgcolor} {\huge \@author}}
+      %% \color{titlefgcolor} {\huge \@author {\ltseries Intelligent Sensory Information Systems}}}
+      \color{titlefgcolor} {\huge \@author\  --- Intelligent Sensory Information Systems}}
     %% \vspace*{\fill}
     %% \columnbreak
     \end{minipage}
