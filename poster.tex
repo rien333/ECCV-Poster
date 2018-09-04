@@ -81,14 +81,14 @@
 \defineblockstyle{eccv2}{
     titlewidthscale=1, bodywidthscale=1, titlecenter,
     titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
-    bodyverticalshift=-6pt, roundedcorners=6, linewidth=0.42cm, % same as innersep
+    bodyverticalshift=-6pt, roundedcorners=6, linewidth=0.43cm, % same as innersep
     titleinnersep=1cm, bodyinnersep=0.21cm
 }{
     \begin{scope}[line width=\blocklinewidth, rounded corners=\blockroundedcorners]
       %% uncomment the ifs for different titleless look
        \ifBlockHasTitle %
            % box outline
-           \draw[draw=eccvgrayblue, fill=white]
+           \draw[draw=green, fill=white]
                (blockbody.south west) rectangle (blocktitle.north east);
            % title rectangle
            \fill[eccvgrayblue]
@@ -116,7 +116,7 @@
       % sorta add these corrdinates/values to the start
       +(0.0cm,6cm) coordinate (c1);
       \path (blockbody.north)
-      +(0.0cm, -1cm) coordinate (c2);
+      +(0.0cm, -1.225cm) coordinate (c2);
       %% \draw [line width=0.42cm,eccvgrayblue, dashed, dash pattern=on 20pt off 20pt] (blockbody.south) -- (blockbody.north);
       \draw [line width=0.15cm,eccvgrayblue] (c1) -- (c2);
     \end{scope}
@@ -311,7 +311,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock[bodyinnersep=25pt, bodyverticalshift=-00pt]{}{
-  \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
+  \begin{itemize}[leftmargin=*, label={\hspace*{-2pt}\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
   \setlength\itemsep{0.8em}
   %% \item Our VAE spontaneously develops the ability to encode numerisotiy in the subitizing range from natural images.
   %% \item Training a VAE on natural images results in a representation that encodes numerosity in the subitizing range.
@@ -328,9 +328,9 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 \block{VARIATIONAL AUTOENCODER}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock[bodyoffsetx=-40pt]{}{
-  \vspace*{20.6pt}
-  \hspace*{-30pt}\includestandalone{vae_diagram}
-  \vspace*{20.6pt}
+  \vspace*{20.8pt}
+  \hspace*{-14pt}\includestandalone{vae_diagram}
+  \vspace*{22.1pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
@@ -359,7 +359,7 @@ The VAE's objective function is the combination of a reconstruction term and a K
 \innerblock{}{
 \begin{tikzfigure}
 %% \includegraphics{vstack_e}
-\vspace*{-15pt}
+\vspace*{-10.5pt}
 \includegraphics[width=0.245\linewidth]{s1} 
 \includegraphics[width=0.245\linewidth]{s2} 
 \includegraphics[width=0.245\linewidth]{s3} 
@@ -384,8 +384,8 @@ The VAE's objective function is the combination of a reconstruction term and a K
 % maybe wrapfig works better but couldn't get it to work
 \begin{minipage}{0.57\linewidth}
 %% \begin{hyphenrules}{nohyphenation}
-\vspace*{-20pt}
-\begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
+\vspace*{-17pt}
+\begin{itemize}[leftmargin=*, label={\hspace*{-2pt}\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
   \setlength\itemsep{1.20em}
   %% \item Separate systems for exact and approximate numerosity representation
   \item \boldblue{Parallel processing} achieves rapid perceptual discrimination of exact numerosity \citep{dehaene2011number}.
@@ -400,8 +400,8 @@ The VAE's objective function is the combination of a reconstruction term and a K
 \begin{minipage}{0.55\linewidth}
 %% \vspace*{-6pt}
 \begin{tikzfigure}
-  \vspace*{-11pt}
-  \hspace*{-90pt}\includegraphics[width=0.75\textwidth, height=12.2cm]{subcrop}
+  \vspace*{-10pt}
+  \hspace*{-92pt}\includegraphics[width=0.74\textwidth, height=12.0cm]{subcrop}
 \end{tikzfigure}
 \end{minipage}
 }
@@ -436,8 +436,8 @@ The VAE's objective function is the combination of a reconstruction term and a K
   \begin{minipage}{0.494\linewidth}
     \centering
     \begin{tikzfigure}
-      \vspace*{-10pt}
-      \hspace*{-10pt}\includegraphics[width=0.8\linewidth]{bce_dfc_crop}
+      \vspace*{-8pt}
+      \hspace*{-9.5pt}\includegraphics[width=0.8\linewidth]{bce_dfc_crop}
     \end{tikzfigure}
   \end{minipage}\hfill
   \begin{minipage}{0.494\linewidth}
@@ -488,19 +488,20 @@ The VAE's objective function is the combination of a reconstruction term and a K
   % https://tex.stackexchange.com/questions/447615/tikzposter-how-to-center-a-tikzfigure-within-a-block
   \begin{tikzfigure}
     \vspace*{-20pt}
-    \includegraphics[width=0.41\linewidth]{NN}\hspace{60pt}
-    \includegraphics[width=0.41\linewidth]{NA}
+    \includegraphics[width=0.409\linewidth]{NN}\hspace{60pt}
+    \includegraphics[width=0.409\linewidth]{NA}
   \end{tikzfigure}
-\vspace*{-5pt}
+\vspace*{-3pt}
 % Maybe Fig.
 \captionof*{table}{\boldblue{Figure 1.} Responses of latent dimensions to changes in object area and numerosity.}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
-\vspace*{-20pt}
+\vspace*{-12.0pt}
 \begin{tikzfigure}
-  \includegraphics[width=0.395\textwidth]{bird_varied_crop}
+  \includegraphics[width=0.392\textwidth]{bird_varied_crop}
 \end{tikzfigure}
+\vspace*{-1pt}
 
 }
 \colorlet{innerblockbodybgcolor}{white}
