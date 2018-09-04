@@ -325,7 +325,11 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 \innerblock[bodyinnersep=25pt, bodyverticalshift=-00pt]{}{
   \begin{itemize}[leftmargin=*, label={\huge\raisebox{-0.25ex}{\textcolor{eccvblue}\textbullet}}]
   \setlength\itemsep{0.8em}
-  \item Visual numerosity in the subitizing range emerges as a statistical property of natural images in VAEs.
+  %% \item Our VAE spontaneously develops the ability to encode numerisotiy in the subitizing range from natural images.
+  %% \item Training a VAE on natural images results in a representation that encodes numerosity in the subitizing range.
+  %% \item Our VAE spontaneously develops the ability to encode numerosity within the subitizing range when trained on natural images.
+  \item Our VAE spontaneously encodes numerosity in the subitizing range when trained on natural images.
+  %% \item Visual numerosity in the subitizing range emerges as a statistical property of natural images in VAEs.
   \item  Numerosity and object area are represented separately, similar to biological neural networks.
   \item A loss function aimed at contour reconstruction improves the network's subitizing performance.
   \item Numerosity information represented in the latent space is successfully extrapolated to a subitizing task.
@@ -344,7 +348,7 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 \innerblock{}{
 \boldblue{VAEs} are generative models that perform \boldblue{unsupervised} representation learning. 
 %Unlike the deterministic latent representation used in conventional autoencoders, VAEs map data samples to a posterior distribution $Q$ representing the latent space. 
-The VAE's objective function is the summation of a reconstruction term and a KL regularization:
+The VAE's objective function is the combination of a reconstruction term and a KL regularization:
 %
 \begin{align}
   %\log P(X) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z \mid X)] = E[\log P(X \mid z) - \mathcal{D}_{KL}[ Q(z \mid X) \mid\mid P(z)]]
