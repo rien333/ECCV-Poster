@@ -88,7 +88,7 @@
       %% uncomment the ifs for different titleless look
        \ifBlockHasTitle %
            % box outline
-           \draw[draw=green, fill=white]
+           \draw[draw=eccvgrayblue, fill=white]
                (blockbody.south west) rectangle (blocktitle.north east);
            % title rectangle
            \fill[eccvgrayblue]
@@ -242,10 +242,10 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
     %% \begin{multicols}{2}
     %% \setstackgap{L}{1em}
     %% \vspace*{-1\topskip plus 1fill}
-  	\noindent\begin{minipage}{0.71\linewidth}
+  	\noindent\begin{minipage}{0.69\linewidth}
     \vbox{
       \color{titlefgcolor} {\bfseries \fontsize{80}{96} \selectfont \@title \par}
-      \vspace*{1.5em}
+      \vspace*{1.21em}
       % The two different colors in the title are really not that nice
       %% \color{titlefgcolor} {\huge \@author {\ltseries Intelligent Sensory Information Systems}}}
       \color{titlefgcolor} {\huge \@author\  --- Intelligent Sensory Information Systems}}
@@ -253,12 +253,13 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
     %% \columnbreak
     \end{minipage}
     \hfill%
-    \begin{minipage}{0.29\linewidth}
+    \begin{minipage}{0.28\linewidth}
       \vspace*{-10pt}
       \noindent\begin{minipage}{0.6\textwidth}\raggedleft
         \@titlegraphic
       \end{minipage}
       \hfill%
+      \hspace*{-20pt}
       \begin{minipage}{0.4\textwidth}\raggedleft
         \hspace*{-25pt}\huge \color{black}University of\\\vspace{-5mm}Amsterdam
       \end{minipage}
@@ -328,9 +329,9 @@ titletotopverticalspace=40pt, titletoblockverticalspace=45pt}{% more precise?
 \block{VARIATIONAL AUTOENCODER}{
 \colorlet{innerblockbodybgcolor}{white}
 \innerblock[bodyoffsetx=-40pt]{}{
-  \vspace*{20.8pt}
+  \vspace*{20.6pt}
   \hspace*{-14pt}\includestandalone{vae_diagram}
-  \vspace*{22.1pt}
+  \vspace*{21.9pt}
 }
 \colorlet{innerblockbodybgcolor}{eccvgrayblue}
 \innerblock{}{
